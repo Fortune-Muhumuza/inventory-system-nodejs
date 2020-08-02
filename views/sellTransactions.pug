@@ -1,0 +1,21 @@
+extends layout
+
+block layout-content
+
+    h1 Previous Transactions
+
+    table(class="table table-dark table-hover table-sm")
+      tr
+        th Name
+        th Quantity sold
+        th Selling Price
+        th Paid
+        th Profit made
+        th Date sold
+      each sells in sell
+        tr
+          td= sells.name
+          td= sells.quantity
+          td= sells.sellingPrice
+          td= sells.paid
+    h3 Total=

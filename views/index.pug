@@ -1,0 +1,25 @@
+extends layout
+
+block layout-content
+    h2 Buying
+    form(action="/products/buy" method="post")
+        label(for='name') name:
+        br
+        input#name(type='text', name='name')
+        br
+        label(for='price') price:
+        br
+
+        input#price(type='number', name='price')
+        br
+        label(for='tax') tax:
+        br
+
+        input#tax(type='number', name='tax')
+        br
+        label(for='quantity') quantity:
+        br
+        input#price(type='number', name='quantity')
+        br
+
+        input(type='submit', value='Submit')

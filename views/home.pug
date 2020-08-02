@@ -1,0 +1,34 @@
+extends layout
+
+block layout-content
+  h1 Store
+  table(class="table table-dark table-hover table-sm")
+    tr
+      th Name
+      th Tax
+      th Quantity available
+      th Selling Price
+      th Current value
+        //value of good basing on selling price
+      th Buying Value 
+        //value of good basing on buying price
+      th Total quantity
+    each products in product
+      tr
+        td= products.name
+        td= products.tax
+        td(class = "quantity")= products.quantity
+        td(class = "sellingPrice")= products.sellingPrice
+        td
+          = products.quantity * products.sellingPrice
+        td= products.value
+    p(id="p")
+
+  script.
+
+    var z = document.getElementByClassName("quantity").value;
+    var w = document.getElementByClassName("sellingPrice").value;
+    var x = parseInt(z) * parseInt(w);
+    //document.write(parseInt(z) * parseInt(w))
+
+    document.getElementById("p").innerHTML = x;
