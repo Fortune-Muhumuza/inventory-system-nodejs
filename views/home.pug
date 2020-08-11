@@ -5,30 +5,30 @@ block layout-content
   table(class="table table-dark table-hover table-sm")
     tr
       th Name
+      th Unit buying price
       th Tax
       th Quantity available
       th Selling Price
       th Current value
         //value of good basing on selling price
+      
       th Buying Value 
         //value of good basing on buying price
-      th Total quantity
+      th Profit per unit
+      th Total Profit in store
+      //th Total quantity
     each products in product
       tr
         td= products.name
+        td= products.buyingPrice
         td= products.tax
-        td(class = "quantity")= products.quantity
-        td(class = "sellingPrice")= products.sellingPrice
+        td= products.quantity
+        td= products.sellingPrice
         td
           = products.quantity * products.sellingPrice
-        td= products.value
-    p(id="p")
+        
+        td= products.buyingValue
+        td= products.profit
+        td= products.profit * products.quantity
+        
 
-  script.
-
-    var z = document.getElementByClassName("quantity").value;
-    var w = document.getElementByClassName("sellingPrice").value;
-    var x = parseInt(z) * parseInt(w);
-    //document.write(parseInt(z) * parseInt(w))
-
-    document.getElementById("p").innerHTML = x;

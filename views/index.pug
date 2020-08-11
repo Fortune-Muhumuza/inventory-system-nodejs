@@ -5,21 +5,27 @@ block layout-content
     form(action="/products/buy" method="post")
         label(for='name') name:
         br
-        input#name(type='text', name='name')
-        br
-        label(for='price') price:
+        input#name(type='text' name='name')
         br
 
-        input#price(type='number', name='price')
+        label(for='price') buying price:
         br
+        input#price(type='number' name='buyingPrice')
+        br
+         
         label(for='tax') tax:
         br
-
-        input#tax(type='number', name='tax')
+        input#tax(type='number' name='tax')
         br
+
+        label(for="sellingPrice") selling Price:
+        br
+        input(type="number" name="sellingPrice")
+        br
+
         label(for='quantity') quantity:
         br
-        input#price(type='number', name='quantity')
+        input#price(type='number' name='quantity')
         br
 
-        input(type='submit', value='Submit')
+        input(type='submit' value='Submit')
