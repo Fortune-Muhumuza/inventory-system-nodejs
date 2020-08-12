@@ -1,6 +1,5 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
-const passport = require('passport');
 
 exports.loginPage = (req, res) => {
     res.render('login')

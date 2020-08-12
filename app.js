@@ -14,8 +14,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 
-app.use('/products', product);
-app.use('/', user);
+app.use('/', product);
+app.use('/user', user);
 
 
 
