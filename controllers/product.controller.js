@@ -29,21 +29,13 @@ exports.product_buy = async function (req, res) {
   IT ALSO REDUCES THE
   QUANTITY ON THE HISTORY TRANSACTION WHICH ISNT GOOD
 */
-  /*
-  const oldProdct = await Product.findOne({ name: req.body.name });
-  const prodct = await Product.findOneAndUpdate(
-    { name: oldProdct.name },
-    { cumulativeQuantity: +oldProdct.cumulativeQuantity + +req.body.quantity }
-  );
 
-  console.log(prodct.cumulativeQuantity);
-*/
   product.save(function (err) {
     if (err) {
       res.send('there was an error');
       // return next(err);
     }
-    res.redirect('/products/');
+    res.redirect('/');
   });
 };
 
@@ -76,7 +68,7 @@ exports.product_sell1 = async (req, res) => {
     if (err) {
       res.send('sorry there was a problem');
     }
-    res.redirect('/products/sellTransactions');
+    res.redirect('/sellTransactions');
   });
 };
 
@@ -102,10 +94,3 @@ exports.product_display = (req, res) => {
     });
 };
 
-exports.product_delete = function (req, res) {
-  Product.findByIdAndRemove(req.params.id, function (err) {
-    // eslint-disable-next-line no-undef
-    if (err) return next(err);
-    res.send('Deleted successfully!');
-  });
-};
