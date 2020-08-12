@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+'use strict';
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let SellTransaction = new Schema({
@@ -11,4 +12,4 @@ let SellTransaction = new Schema({
 });
 
 // Export the model
-module.exports = mongoose.model("Sell", SellTransaction);
+module.exports = mongoose.model('Sell', SellTransaction);
