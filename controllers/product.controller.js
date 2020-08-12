@@ -51,7 +51,6 @@ exports.product_sell = (req, res) => {
   res.render('sell');
 };
 
-
 exports.product_sell1 = async (req, res) => {
   // remember to only change the variable quantity not the quantity bought
   const oldProduct = await Product.findOne({ name: req.body.name });
@@ -93,7 +92,6 @@ exports.displayTransactions = (req, res) => {
   });
 };
 
-
 exports.product_display = (req, res) => {
   Product.find()
     .then((product) => {
@@ -111,5 +109,3 @@ exports.product_delete = function (req, res) {
     res.send('Deleted successfully!');
   });
 };
-
-
