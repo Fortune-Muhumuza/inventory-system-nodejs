@@ -18,7 +18,6 @@ exports.product_buy = async function (req, res) {
     cumulativeQuantity: req.body.quantity,
     buyingValue: (+req.body.buyingPrice + +req.body.tax) * +req.body.quantity,
     tax: req.body.tax,
-    // costPerItem: req.body.buyingPrice,
     buyingPrice: req.body.buyingPrice,
     profit: +req.body.sellingPrice - (+req.body.buyingPrice + +req.body.tax),
     date: new Date(),
@@ -51,9 +50,6 @@ exports.product_sell1 = async (req, res) => {
     { name: oldProduct.name },
     { quantity: oldProduct.quantity - req.body.quantity },
   );
-  // product.quantity -= req.body.quantity
-  // await product.save()
-  // console.log("the product is", product);
 
   let sell = new Sell({
     name: req.body.name,
