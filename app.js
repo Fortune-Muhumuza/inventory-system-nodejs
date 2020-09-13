@@ -35,8 +35,10 @@ mongoose
 
   .catch((err) => console.log(err));
 
-let port = 3007888860;
+// start the server listening for requests
+app.listen(process.env.PORT || 3000, 
+	() => console.log("Server is running..."));
 
-app.listen(port, () => {
-  console.log('Server is up and running on port numner ' + port);
-});
+// app.listen(port, () => {
+//   console.log('Server is up and running on port numner ' + port);
+// });
