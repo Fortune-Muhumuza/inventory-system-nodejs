@@ -17,7 +17,6 @@ app.use('/', product);
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
@@ -30,14 +29,17 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
+    console.log('Please wait while I connect to the database');
+  })
+
+  .then(() => {
     console.log('MongoDB Connected…');
   })
 
   .catch((err) => console.log(err));
 
 // start the server listening for requests
-app.listen(process.env.PORT || 3000, 
-	() => console.log("Server is running..."));
+app.listen(process.env.PORT || 3000, () => console.log('Server is running...'));
 
 // app.listen(port, () => {
 //   console.log('Server is up and running on port numner ' + port);

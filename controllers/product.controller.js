@@ -80,6 +80,14 @@ exports.displayTransactions = (req, res) => {
   });
 };
 
+exports.displayTransactionsJSON = (req, res) => {
+  Sell.find(function (err, sell) {
+    Product.find(function (err, product) {
+      return res.json({ sell });
+    });
+  });
+};
+
 exports.product_display = (req, res) => {
   Product.find()
     .then((product) => {

@@ -12,20 +12,23 @@ html
     // Latest compiled JavaScript
     script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js')
 
-    title #{title} | WHATABYTE
-  body
-  nav.navbar.navbar-expand-sm.bg-primary.navbar-dark
-    ul.navbar-nav
-      li.nav-item
-        a.nav-link(href='/sell') Sell
-      li.nav-item
-        a.nav-link(href='/test') Buy
-      li.nav-item
-        a.nav-link(href='/') Store
-      li.nav-item
-        a.nav-link(href='/sellTransactions') Transaction history
     
-  div#root
-      block layout-content
 
+    title #{title} | WHATABYTE
+  div.container
+    body
+    nav.navbar.navbar-expand-sm.bg-primary.navbar-dark
+      ul.navbar-nav
+        li.nav-item
+          a.nav-link(href='/sell') Sell
+        li.nav-item
+          a.nav-link(href='/test') Buy
+        li.nav-item
+          a.nav-link(href='/') Store
+        li.nav-item
+          a.nav-link(href='/sellTransactions') Transaction history
       
+    div#root
+        block layout-content
+
+        
