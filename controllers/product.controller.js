@@ -44,7 +44,7 @@ exports.product_buy = async function (req, res) {
 };
 
 exports.product_sell = (req, res) => {
-  res.render('sell');
+  res.render('sell', {page_name: 'sell'});
 };
 
 exports.product_sell1 = async (req, res) => {

@@ -4,12 +4,15 @@ html
   body
     .bigDiv
       .center
-        h2 Register
-        label Username:
-        input.loginInput
-        br
-        p
-        label Password:
-        input.loginInput
-        p
-        button.loginButton Register
+        h2 Signup
+        form(action='/user/signup' method='post')
+          label(for='fname') Name:
+          br
+          input#fname(type='text' required="true" class="loginInput" name='name')
+          br
+          label(for='lname') Password:
+          br
+          input#lname(type='password' required="true" class="loginInput" name='password')
+          br
+          br
+          input(type='submit' class="loginButton" value='Signup')

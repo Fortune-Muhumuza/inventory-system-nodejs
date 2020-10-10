@@ -5,11 +5,14 @@ html
     .bigDiv
       .center
         h2 Login
-        label Username:
-        input.loginInput
-        br
-        p
-        label Password:
-        input.loginInput
-        p
-        button.loginButton Login
+        form(action='/user/login' method='post')
+          label(for='fname') Name:
+          br
+          input#fname(type='text' required="true" class="loginInput" name='name')
+          br
+          label(for='lname') Password:
+          br
+          input#lname(type='password' required="true" class="loginInput" name='password')
+          br
+          br
+          input(type='submit' class="loginButton" value='Login')

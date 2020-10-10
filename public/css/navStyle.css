@@ -1,9 +1,13 @@
+.navi{
+  box-shadow: 4px 4px 3px rgb(8, 1, 15);
+}
+
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: rgb(42, 187, 187);
   }
   
   li {
@@ -12,14 +16,15 @@ ul {
   
   li a {
     display: block;
-    color: white;
+    color: rgb(14, 1, 1);
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
   }
   
   li a:hover:not(.active) {
-    background-color: #111;
+    background-color: rgb(243, 230, 230);
+    color: black
   }
   
   .active {

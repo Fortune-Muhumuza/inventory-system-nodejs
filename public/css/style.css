@@ -1,0 +1,71 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    .formInput{
+    width: 200px;
+    border-radius: 12px;
+    }
+    
+    .blueButton{
+    padding: 6px;
+    background-color: dodgerblue;
+     border: 2px solid lightblue;
+    border-radius: 15px;
+    width: 60px;
+    color: white;
+    }
+    
+    .blueButton:hover{
+    box-shadow: 1px 1px 5px 1px black;
+    }
+    
+    .bigDiv{
+    padding: 70px 0;
+    }
+    .center {
+      margin: auto;
+      width: 300px;
+      border: 0.1px solid dodgerblue;
+      padding-top: 10px;
+      padding-right: 20px;
+      padding-left: 20px;
+      padding-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 1px 1px 15px 1px black;
+    }
+    .center h2{
+    text-align: center;
+    }
+
+
+    /* table styling */
+      
+      #table1 {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      
+      #table1 tr:nth-child(even){background-color: #f2f2f2;}
+      
+      #table1 td, #table1 th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+      
+      #table1 tr:hover {background-color: #ddd;}
+      
+      #table1 th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #0cf314;
+        color: white;
+      }
+    
+        body{
+          background-color: rgb(255, 255, 255);
+        }
+
+        /* table styling ends here */

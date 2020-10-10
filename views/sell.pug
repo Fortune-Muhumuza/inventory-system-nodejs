@@ -1,20 +1,17 @@
 extends base
 
 block content
-    h1 Sell
-    form(action="/sell" method="post")  
-        label Shoe name
-        // this will be a dropdown
-        input(type='text' required="true" name='name')
-        br
-        //label Selling price
-        //ive included this because some clients may bargain
-        //input(type='text', name='sellingPrice')
-        //br
-        label Quantity
-        input(type='text' required="true" name='quantity') 
-        br
+    .bigDiv
+        .center
+            h1 Sell
+            form(action="/sell" method="post")  
+                label Shoe name
+                // this will be a dropdown
+                input(type='text' required="true" name='name' class="formInput")
+                br
+                label Quantity
+                input(type='number' required="true" name='quantity' class="formInput") 
+                br
 
-        input(type='submit', value='Sell')
+                input(type='submit' value='Sell' class="blueButton")
 
-    P Pay this:     

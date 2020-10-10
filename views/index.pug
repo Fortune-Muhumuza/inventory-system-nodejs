@@ -1,31 +1,33 @@
 extends base
 
 block content
-    h2 Buying
-    form(action="/buy" method="post")
-        label(for='name') name:
-        br
-        input#name(type='text' required="true" name='name')
-        br
+    .bigDiv
+        .center
+            h2 Buying
+            form(action="/buy" method="post")
+                label(for='name') Shoe:
+                br
+                input#name(type='text' required="true" name='name' class="formInput")
+                br
 
-        label(for='price') buying price:
-        br
-        input#price(type='number' required="true" name='buyingPrice')
-        br
-         
-        label(for='tax') tax:
-        br
-        input#tax(type='number' required="true" name='tax')
-        br
+                label(for='price') Buying price:
+                br
+                input#price(type='number' required="true" name='buyingPrice' class="formInput")
+                br
 
-        label(for="sellingPrice") selling Price:
-        br
-        input(type="number" required="true" name="sellingPrice")
-        br
+                label(for='tax') Tax:
+                br
+                input#tax(type='number' required="true" name='tax' class="formInput")
+                br
 
-        label(for='quantity') quantity:
-        br
-        input#price(type='number' required="true" name='quantity')
-        br
+                label(for="sellingPrice") Selling Price:
+                br
+                input(type="number" required="true" name="sellingPrice" class="formInput")
+                br
 
-        input(type='submit' value='Submit')
+                label(for='quantity') Quantity:
+                br
+                input#price(type='number' required="true" name='quantity' class="formInput")
+                br
+
+                input(type='submit' value='Submit' class="blueButton")
