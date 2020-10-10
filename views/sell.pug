@@ -5,14 +5,14 @@ block layout-content
     form(action="/sell" method="post")  
         label Shoe name
         // this will be a dropdown
-        input(type='text', name='name')
+        input(type='text' required="true" name='name')
         br
         //label Selling price
         //ive included this because some clients may bargain
         //input(type='text', name='sellingPrice')
         //br
         label Quantity
-        input(type='text', name='quantity') 
+        input(type='text' required="true" name='quantity') 
         br
 
         input(type='submit', value='Sell')
