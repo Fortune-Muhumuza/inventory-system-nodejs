@@ -6,7 +6,7 @@ const path = require('path');
 
 // Imports routes for the products
 const product = require('./routes/product.route');
-//const user = require('./routes/user.route');
+const user = require('./routes/user.route');
 // initialize our express app
 const app = express();
 
@@ -14,6 +14,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/', product);
+app.use('/user/', user)
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
