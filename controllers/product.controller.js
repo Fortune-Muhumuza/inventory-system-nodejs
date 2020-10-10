@@ -12,7 +12,11 @@ exports.product_buy = async function (req, res) {
   // THE STANDARD SELLING PRICE WITH PROFIT INCLUDED
 
   let product = new Product({
-    name: req.body.name,
+    // this has a function for converting the first letter of the input to
+    // caps lock for consistency and easy fetching from the database
+    // name: (req.body.name.charAt(0).toUpperCase() + req.body.name.slice(1)),
+    name: req.body.name.toLowerCase(),
+    //decided to use lower case instead
     sellingPrice: req.body.sellingPrice,
     quantity: req.body.quantity,
     cumulativeQuantity: req.body.quantity,
@@ -20,7 +24,7 @@ exports.product_buy = async function (req, res) {
     tax: req.body.tax,
     buyingPrice: req.body.buyingPrice,
     profit: +req.body.sellingPrice - (+req.body.buyingPrice + +req.body.tax),
-    date: new Date(),
+    date: dateFormat(new Date(), "dddd, mmmm dS, yyyy, h:MM:ss TT"),
   });
   /* this is for the cumulative quantity ..THIS IS VERY IMPORTANT AND SHOULD BE
    TREATED AS A
