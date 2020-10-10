@@ -27,6 +27,7 @@ mongoose
   .connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false
   })
   .then(() => {
     console.log('Please wait while I connect to the database');

@@ -1,7 +1,9 @@
 /* eslint-disable space-before-function-paren */
 'use strict';
+const dateFormat = require('dateformat');
 const Product = require('../models/product.model');
 const Sell = require('../models/sellTransactions');
+
 
 // Simple version, without validation or sanitation
 exports.test = function (req, res) {
@@ -24,7 +26,7 @@ exports.product_buy = async function (req, res) {
     tax: req.body.tax,
     buyingPrice: req.body.buyingPrice,
     profit: +req.body.sellingPrice - (+req.body.buyingPrice + +req.body.tax),
-    date: dateFormat(new Date(), "dddd, mmmm dS, yyyy, h:MM:ss TT"),
+    date: dateFormat(new Date(), "dddd-mmmm-dS-yyyy, h:MM TT"),
   });
   /* this is for the cumulative quantity ..THIS IS VERY IMPORTANT AND SHOULD BE
    TREATED AS A
@@ -61,7 +63,7 @@ exports.product_sell1 = async (req, res) => {
     sellingPrice: oldProduct.sellingPrice,
     paid: +oldProduct.sellingPrice * +req.body.quantity,
     profit: +oldProduct.profit * +req.body.quantity,
-    date: new Date(),
+    date: dateFormat(new Date(), "dddd-mmmm-dS-yyyy, h:MM TT"),
   });
   // INCASE OF ERRORS WE NEED TO FIND A WAY OF NOT CRUSHING SERVER
   sell.save(function (err) {
