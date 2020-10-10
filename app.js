@@ -6,6 +6,7 @@ const path = require('path');
 
 // Imports routes for the products
 const product = require('./routes/product.route');
+//const user = require('./routes/user.route');
 // initialize our express app
 const app = express();
 

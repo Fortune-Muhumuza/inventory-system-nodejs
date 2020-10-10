@@ -11,12 +11,11 @@ exports.test = function (req, res) {
 };
 
 exports.product_buy = async function (req, res) {
-  // THE STANDARD SELLING PRICE WITH PROFIT INCLUDED
+  // In a future version maybe ill add option for first
+  // querying the DB to see if the product exists already
+  // if it does ill just increase its amount
 
   let product = new Product({
-    // this has a function for converting the first letter of the input to
-    // caps lock for consistency and easy fetching from the database
-    // name: (req.body.name.charAt(0).toUpperCase() + req.body.name.slice(1)),
     name: req.body.name.toLowerCase(),
     //decided to use lower case instead
     sellingPrice: req.body.sellingPrice,
