@@ -1,5 +1,8 @@
 const User = require('../models/User');
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken');
+
+const accessTokenSecret = 'youraccesstokensecret';
 
 
 
@@ -39,6 +42,6 @@ exports.postLogin = async (req, res) => {
     res.json('wrong details');
   }
 
-
+  const accessToken = jwt.sign({ username: user.username,  role: user.role }, accessTokenSecret);
   res.redirect('/');
 };
