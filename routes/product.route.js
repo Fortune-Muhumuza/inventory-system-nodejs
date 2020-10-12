@@ -1,8 +1,6 @@
 'use strict';
 const express = require('express');
 const router = express.Router();
-
-// Require the controllers WHICH WE DID NOT CREATE YET!!
 const product_controller = require('../controllers/product.controller');
 
 
@@ -14,5 +12,7 @@ router.get('/sellTransactionsJSON', product_controller.displayTransactionsJSON);
 
 router.post('/sell', product_controller.product_sell1);
 router.post('/buy', product_controller.product_buy);
+
+
 
 module.exports = router;

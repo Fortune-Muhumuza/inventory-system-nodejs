@@ -3,6 +3,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const flash = require('connect-flash');
+const passport = require('passport');
+const setUpPassport = require('./setuppassport');
 
 // Imports routes for the products
 const product = require('./routes/product.route');
@@ -12,6 +17,17 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(session({
+    secret: 'TKRv0IJs=HYqrvagQ#&!F!%V]Ww/4KiVs$s,<<MX',
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
+
+setUpPassport();
 
 app.use('/', product);
 app.use('/user/', user)

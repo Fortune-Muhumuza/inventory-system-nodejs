@@ -37,58 +37,23 @@ block content
         td= products.buyingPrice
         td= products.date
 
-  #chartContainer(style='height: 300px; width: 100%;')
 
   script.
-    var table = document.getElementById("table"), sumVal = 0;
-    for(var i = 1; i < table.rows.length; i++)
-    {
-    sumVal = sumVal + parseInt(table.rows[i].cells[4].innerHTML);
-    }
-    document.getElementById("val").innerHTML = "Total profit = " + sumVal;
-    console.log(sumVal);
+    //- var table = document.getElementById("table"), sumVal = 0;
+    //- for(var i = 1; i < table.rows.length; i++)
+    //- {
+    //- sumVal = sumVal + parseInt(table.rows[i].cells[4].innerHTML);
+    //- }
+    //- document.getElementById("val").innerHTML = "Total profit = " + sumVal;
+    //- console.log(sumVal);
 
 
     function display() {
     window.print();
     }
 
- 
-  script(src='https://canvasjs.com/assets/script/jquery-1.11.1.min.js')
-  script(src='https://canvasjs.com/assets/script/canvasjs.min.js')
 
 
-  script.
-    window.onload = function() {
-    var dataPoints = [];
-    var chart = new CanvasJS.Chart("chartContainer", {
-    animationEnabled: true,
-    theme: "light2",
-    title: {
-    text: "Daily Sales Data"
-    },
-    axisY: {
-    title: "Quantity",
-    titleFontSize: 24,
-    includeZero: true
-    },
-    data: [{
-    type: "column",
-    yValueFormatString: "#,### Name",
-    dataPoints: dataPoints
-    }]
-    });
-    function addData(data) {
-    for (var i = 0; i < data.length; i++) {
-    dataPoints.push({
-    x: new Date(data[i].quantity),
-    y: data[i].sellingPrice
-    });
-    }
-    chart.render();
-    }
-    $.getJSON("http://localhost:3000/sellTransactionsJSON", addData);
-    }
 
 
 
