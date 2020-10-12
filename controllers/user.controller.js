@@ -1,10 +1,5 @@
 const User = require('../models/User');
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken');
-
-const accessTokenSecret = 'youraccesstokensecret';
-
-
+const bcrypt = require('bcrypt');
 
 exports.signup = (req, res) => {
   res.render('signup');
@@ -14,18 +9,17 @@ exports.login = (req, res) => {
   res.render('login');
 };
 
-exports.postSignup = async(req, res) => {
-  try{
-      const hashedPassword = await bcrypt.hash(req.body.password, 10)
-      const user = new User({
-          name: req.body.name,
-          password: hashedPassword
-      })
-      user.save()
-      res.redirect('/user/login')
- }
-  catch{
-res.redirect('/signup')
+exports.postSignup = async (req, res) => {
+  try {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const user = new User({
+      name: req.body.name,
+      password: hashedPassword,
+    });
+    user.save();
+    res.redirect('/user/login');
+  } catch {
+    res.redirect('/signup');
   }
 };
 
@@ -42,6 +36,7 @@ exports.postLogin = async (req, res) => {
     res.json('wrong details');
   }
 
-  const accessToken = jwt.sign({ name: user.name}, accessTokenSecret);
+
+
   res.redirect('/');
 };
