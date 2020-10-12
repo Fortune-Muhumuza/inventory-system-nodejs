@@ -20,11 +20,11 @@ block content
         td= sells.paid
         td= sells.profit
         td= sells.date
-  h3(id="val") Total=
+  h3(id="val") 
 
   h1 Buying Transactions
 
-  table(id="table1")
+  table(id="table")
     tr
       th Name
       th Quantity bought
@@ -39,14 +39,18 @@ block content
 
 
   script.
-    //- var table = document.getElementById("table"), sumVal = 0;
-    //- for(var i = 1; i < table.rows.length; i++)
-    //- {
-    //- sumVal = sumVal + parseInt(table.rows[i].cells[4].innerHTML);
-    //- }
-    //- document.getElementById("val").innerHTML = "Total profit = " + sumVal;
-    //- console.log(sumVal);
+      var table = document.getElementById("table1"), sumVal = 0;
+      for(var i = 1; i < table.rows.length; i++)
+      {
+      sumVal = sumVal + parseInt(table.rows[i].cells[4].innerHTML);
+      }
+      document.getElementById("val").innerHTML = "Total profit = " + sumVal;
+      console.log(sumVal);
 
+
+      function display() {
+      window.print();
+      }
 
     function display() {
     window.print();
