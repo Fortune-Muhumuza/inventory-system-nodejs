@@ -42,6 +42,6 @@ exports.postLogin = async (req, res) => {
     res.json('wrong details');
   }
 
-  const accessToken = jwt.sign({ username: user.username,  role: user.role }, accessTokenSecret);
+  const accessToken = jwt.sign({ name: user.name}, accessTokenSecret);
   res.redirect('/');
 };
