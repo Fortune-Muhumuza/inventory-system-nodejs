@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
+const session = require('express-session')
 
 // Imports routes for the products
 const product = require('./routes/product.route');
@@ -13,6 +14,18 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(session({
+  name: 'sid',
+  resave: false,
+  saveUninitialized:false,
+  secret: 'secret',
+  cookie: {
+    //this is 15 hours
+    maxAge: 5.4e+7,
+    sameSite: true,
+   // secure: true
+  }
+}))
 
 app.use('/', product);
 app.use('/user/', user)
@@ -41,6 +54,7 @@ mongoose
   })
 
   .catch((err) => console.log(err));
+
 
 // start the server listening for requests
 app.listen(process.env.PORT || 3000, () => console.log('Server is running...'));

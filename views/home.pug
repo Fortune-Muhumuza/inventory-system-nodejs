@@ -1,34 +1,51 @@
 extends base
 
 block content
-  h1 Store
-  table(id="table1")
+  h2 Store
+  table(class="table1" id="table1")
     tr
       th Name
       th Unit buying price
-      th Tax
+      th(class="smallScreenHide") Tax
       th Quantity available
-      th Selling Price
-      th Current value
+      th(class="smallScreenHide") Selling Price
+      th(class="smallScreenHide") Current value
         //value of good basing on selling price
-      
-      th Buying Value 
+
+      th(class="smallScreenHide") Buying Value 
         //value of good basing on buying price
-      th Profit per unit
+      th(class="smallScreenHide") Profit per unit
       th Total Profit in store
       //th Total quantity
     each products in product
       tr
         td= products.name
         td= products.buyingPrice
-        td= products.tax
+        td(class="smallScreenHide")= products.tax
         td= products.quantity
-        td= products.sellingPrice
-        td
+        td(class="smallScreenHide")= products.sellingPrice
+        td(class="smallScreenHide")
           = products.quantity * products.sellingPrice
-        
-        td= products.buyingValue
-        td= products.profit
+
+        td(class="smallScreenHide")= products.buyingValue
+        td(class="smallScreenHide")= products.profit
         td= products.profit * products.quantity
-        
+    h4(id="val")
+    h4(id="totalProfit")
+    script.
+      var table = document.getElementById("table1"), sumVal = 0;
+      for(var i = 1; i < table.rows.length; i++)
+      {
+      sumVal = sumVal + parseInt(table.rows[i].cells[3].innerHTML);
+      }
+      document.getElementById("val").innerHTML = "Shoes in stock = " + sumVal;
+
+      var table = document.getElementById("table1"), sumVal = 0;
+      for(var i = 1; i < table.rows.length; i++)
+      {
+      sumVal = sumVal + parseInt(table.rows[i].cells[8].innerHTML);
+      }
+      document.getElementById("totalProfit").innerHTML = "Profit in store = " + sumVal.toLocaleString();
+      
+
 

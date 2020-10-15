@@ -2,64 +2,73 @@ extends base
 
 block content
 
-  h1 Sale Transactions
-  button(onclick='display()') Print records
-  table( id="table1")
+  h2 Sale Transactions
+  button(onclick='display()' class="blueButton") Print records
+  br
+  table( id="table1" class="table1")
     tr
       th Name
       th Quantity sold
-      th Selling Price
-      th Paid
+      th(class="smallScreenHide") Selling Price
+      th(class="smallScreenHide") Paid
       th Profit made
-      th Date sold
+      th(class="tableDate") Date sold
     each sells in sell
       tr
         td= sells.name
         td= sells.quantity
-        td= sells.sellingPrice
-        td= sells.paid
+        td(class="smallScreenHide")= sells.sellingPrice
+        td(class="smallScreenHide")= sells.paid
         td= sells.profit
-        td= sells.date
+        td(class="tableDate")= sells.date
   h3(id="val") 
   h3(id="val2")
 
-  h1 Buying Transactions
+  h2 Buying Transactions
 
-  table(id="table")
+  table(class="table1" id="table2")
     tr
       th Name
       th Quantity bought
       th Buying Price
-      th Date bought 
+      th(class="tableDate") Date bought 
     each products in product
       tr
         td(id="pName")= products.name
         td= products.cumulativeQuantity
         td= products.buyingPrice
-        td= products.date
+        td(class="tableDate")= products.date
 
+  h3(id="shoesBought")
 
   script.
-      var table = document.getElementById("table1"), sumVal = 0;
-      for(var i = 1; i < table.rows.length; i++)
-      {
-      sumVal = sumVal + parseInt(table.rows[i].cells[4].innerHTML);
-      }
-      document.getElementById("val").innerHTML = "Total profit = " + sumVal;
-      console.log(sumVal);
+    var table = document.getElementById("table1"), sumVal = 0;
+    for(var i = 1; i < table.rows.length; i++)
+    {
+    sumVal = sumVal + parseInt(table.rows[i].cells[4].innerHTML);
+    }
+    document.getElementById("val").innerHTML = "Total profit = " + sumVal.toLocaleString();
+    console.log(sumVal);
 
 
-      var totalShoes = document.getElementById("table1"), Total = 0;
-            for(var i = 1; i < totalShoes.rows.length; i++)
-      {
-      Total = Total + parseInt(totalShoes.rows[i].cells[1].innerHTML);
-      }
-      document.getElementById("val2").innerHTML = "Total shoes sold = " + Total;
+    var totalShoes = document.getElementById("table1"), Total = 0;
+      for(var i = 1; i < totalShoes.rows.length; i++)
+    {
+    Total = Total + parseInt(totalShoes.rows[i].cells[1].innerHTML);
+    }
+    document.getElementById("val2").innerHTML = "Total shoes sold = " + Total;
+
+    var totalShoesBought = document.getElementById("table2"), sum = 0;
+    for(var i = 1; i < totalShoesBought.rows.length; i++)
+    {
+    sum = sum + parseInt(totalShoesBought.rows[i].cells[1].innerHTML);
+    }
+    document.getElementById("shoesBought").innerHTML = "Total shoes bought = " + sum;
 
 
-      function display() {
-      window.print();
-      }
+    function display() {
+    window.print();
+    }
 
     function display() {
     window.print();

@@ -1,6 +1,5 @@
 'use strict';
 const mongoose = require('mongoose');
-var bcrypt = require('bcrypt');
 
 
 // User Schema
