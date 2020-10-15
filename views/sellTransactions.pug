@@ -21,6 +21,7 @@ block content
         td= sells.profit
         td= sells.date
   h3(id="val") 
+  h3(id="val2")
 
   h1 Buying Transactions
 
@@ -46,6 +47,14 @@ block content
       }
       document.getElementById("val").innerHTML = "Total profit = " + sumVal;
       console.log(sumVal);
+
+
+      var totalShoes = document.getElementById("table1"), Total = 0;
+            for(var i = 1; i < totalShoes.rows.length; i++)
+      {
+      Total = Total + parseInt(totalShoes.rows[i].cells[1].innerHTML);
+      }
+      document.getElementById("val2").innerHTML = "Total shoes sold = " + Total;
 
 
       function display() {
