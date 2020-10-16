@@ -12,4 +12,21 @@ div.navi
     li
       a(href='/sellTransactions') Transactions
     li
-      a(href='/user/logout') Logout
+      a(href='/user/logout' id="logout") Logout
+
+script.
+  const button = document.getElementById('logout');
+
+  button.addEventListener('click', async _ => {
+    try {     
+      const response = await fetch('http://localhost:3000/user/logout', {
+        method: 'post',
+        body: {
+          // Your body
+        }
+      });
+      console.log('Completed!', response);
+    } catch(err) {
+      console.error(`Error: ${err}`);
+    }
+    });

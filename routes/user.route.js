@@ -11,6 +11,8 @@ router.get('/login', user_controller.login);
 
 router.post('/signup', user_controller.postSignup);
 router.post('/login', user_controller.postLogin);
+//this is critical and needs to be changed to post as soon as possible
+router.get('/logout', user_controller.logout);
 
 
 

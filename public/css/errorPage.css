@@ -1,0 +1,14 @@
+.errorCard{
+    background-color: rgb(250, 16, 16);
+padding: 10px;
+}
+
+.center {
+    margin: auto;
+    width: 300px;
+    border: 0.1px solid dodgerblue;
+    border-radius: 10px;
+    box-shadow: 1px 1px 15px 1px black;
+  }
+
+

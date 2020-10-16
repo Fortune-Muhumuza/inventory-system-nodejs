@@ -38,7 +38,7 @@ app.set('view engine', 'pug');
 
 const uri =
   // eslint-disable-next-line max-len
-  'mongodb+srv://Fort:fortune@cluster0.144qe.mongodb.net/<dbname>?retryWrites=true&w=majority';
+  'mongodb+srv://Fort:fortune@cluster0.144qe.mongodb.net/KhanShoeCenter?retryWrites=true&w=majority';
 mongoose
   .connect(uri, {
     useNewUrlParser: true,

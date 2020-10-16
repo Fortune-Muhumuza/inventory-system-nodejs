@@ -14,7 +14,7 @@ exports.postSignup = async (req, res) => {
   try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = new User({
-      name: req.body.name,
+      name: req.body.name.toUpperCase(),
       password: hashedPassword,
     });
     user.save();
@@ -28,17 +28,28 @@ exports.postLogin = async (req, res) => {
   let { name, password } = req.body;
   if (!name || !password) res.json('please provide name and password', 400);
   const user = await User.findOne({ name });
-  
 
-  if (
-    !(req.body.name === user.name) ||
-    !(req.body.password === user.password)
-  ) {
-    res.json('wrong details');
+  const match = await bcrypt.compare(password, user.password);
+
+  // if (
+  //   !(req.body.name === user.name) ||
+  //   !(req.body.password === user.password)
+  // )
+  if (!match) {
+    res.render('error', {error: 'The password you have entered is incorrect'});
+  }
+  if (!(name === user.name)) {
+    res.render('error', { error: 'Sorry, user not found' });
   }
 
-req.session.userId = user._id
+  req.session.userId = user._id;
 
-//console.log(req.session)
   res.redirect('/');
+};
+
+exports.logout = (req, res) => {
+  req.session.destroy(function (err) {
+    // cannot access session here
+  });
+  res.redirect('/user/login');
 };
