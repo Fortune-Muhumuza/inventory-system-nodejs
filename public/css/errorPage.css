@@ -1,14 +1,26 @@
 .errorCard{
-    background-color: rgb(250, 16, 16);
+    background-color: rgb(16, 250, 55);
 padding: 10px;
+font-size: 20px;
 }
 
 .center {
     margin: auto;
-    width: 300px;
+    width: 80%;
     border: 0.1px solid dodgerblue;
     border-radius: 10px;
     box-shadow: 1px 1px 15px 1px black;
+  }
+
+  @media screen and (min-width: 450px) {
+.errorCard{
+    font-size: 20px;
+    background-color: red;
+
+}
+.center{
+    width: 40%;
+}
   }
 
 

@@ -2,12 +2,13 @@
   box-shadow: 4px 4px 3px rgb(8, 1, 15);
 }
 
+
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: rgb(42, 187, 187);
+    background-color: rgb(11, 87, 87);
   }
   
   li {
@@ -16,7 +17,7 @@ ul {
   
   li a {
     display: block;
-    color: rgb(14, 1, 1);
+    color: rgb(236, 232, 232);
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -30,3 +31,27 @@ ul {
   .active {
     background-color: #4CAF50;
   }
+
+  @media screen and (max-width: 450px) {
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    } 
+
+    li{
+      float: none;
+    }
+    
+    li a {
+      display: block;
+    }
+
+.navi{
+  display: none;
+}
+
+  }
+
+

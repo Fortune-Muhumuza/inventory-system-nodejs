@@ -38,6 +38,13 @@ body{
     text-align: center;
     }
 
+    .menu-button{
+      border-radius: 15px;
+      background-color: dodgerblue;
+      color: white;
+    }
+
+
 
     /* table styling */
       
@@ -68,13 +75,16 @@ body{
           background-color: rgb(245, 250, 246);
         }
 
-        @media screen and (max-width: 400px) {
+        @media screen and (max-width: 450px) {
           .tableDate {
             display: none;
           }
+
           .smallScreenHide {
             display: none;
           }
+
+  
         }
 
         /* table styling ends here */

@@ -4,7 +4,6 @@ const dateFormat = require('dateformat');
 const Product = require('../models/product.model');
 const Sell = require('../models/sellTransactions');
 
-
 // Simple version, without validation or sanitation
 exports.test = function (req, res) {
   res.render('index');
@@ -25,7 +24,7 @@ exports.product_buy = async function (req, res) {
     tax: req.body.tax,
     buyingPrice: req.body.buyingPrice,
     profit: +req.body.sellingPrice - (+req.body.buyingPrice + +req.body.tax),
-    date: dateFormat(new Date(), "dddd-mmmm-dS-yyyy, h:MM TT"),
+    date: dateFormat(new Date(), 'dddd-mmmm-dS-yyyy, h:MM TT'),
   });
   /* this is for the cumulative quantity ..THIS IS VERY IMPORTANT AND SHOULD BE
    TREATED AS A
@@ -44,33 +43,53 @@ exports.product_buy = async function (req, res) {
 };
 
 exports.product_sell = (req, res) => {
-  res.render('sell', {page_name: 'sell'});
+  res.render('sell', { page_name: 'sell' });
 };
 
 exports.product_sell1 = async (req, res) => {
-  // remember to only change the variable quantity not the quantity bought
-  const oldProduct = await Product.findOne({ name: req.body.name });
-  // eslint-disable-next-line no-unused-vars
-  const product = await Product.findOneAndUpdate(
-    { name: oldProduct.name },
-    { quantity: oldProduct.quantity - req.body.quantity },
-  );
+  const oldProduct = await Product.findOne({
+    name: req.body.name.toLowerCase(),
+  });
 
-  let sell = new Sell({
-    name: req.body.name,
-    quantity: req.body.quantity,
-    sellingPrice: oldProduct.sellingPrice,
-    paid: +oldProduct.sellingPrice * +req.body.quantity,
-    profit: +oldProduct.profit * +req.body.quantity,
-    date: dateFormat(new Date(), "dddd-mmmm-dS-yyyy, h:MM TT"),
-  });
-  // INCASE OF ERRORS WE NEED TO FIND A WAY OF NOT CRUSHING SERVER
-  sell.save(function (err) {
-    if (err) {
-      res.send('sorry there was a problem');
+  // this checks if there are still shoes of that brand or model in stock and does the needful
+
+  if (oldProduct.quantity <= 0) {
+    res.render('error', { error: 'Sorry, this shoe is out of stock' });
+  }
+  if (req.body.quantity > oldProduct.quantity) {
+    res.render('error', {
+      error:
+        'Sorry, the quantity of shoes in stock is less than the quantity you are trying to sell, please enter a lower quantity',
+    });
+  } else {
+    // remember to only change the variable quantity not the quantity bought
+    const product = await Product.findOneAndUpdate(
+      { name: oldProduct.name },
+      { quantity: oldProduct.quantity - req.body.quantity }
+    );
+
+    if (!product) {
+      res.render('error', {
+        error: 'Sorry, the shoe you requested for is not in stock',
+      });
+    } else {
+      let sell = new Sell({
+        name: req.body.name.toLowerCase(),
+        quantity: req.body.quantity,
+        sellingPrice: oldProduct.sellingPrice,
+        paid: +oldProduct.sellingPrice * +req.body.quantity,
+        profit: +oldProduct.profit * +req.body.quantity,
+        date: dateFormat(new Date(), 'dddd-mmmm-dS-yyyy, h:MM TT'),
+      });
+      // INCASE OF ERRORS WE NEED TO FIND A WAY OF NOT CRUSHING SERVER
+      sell.save(function (err) {
+        if (err) {
+          res.send('sorry there was a problem');
+        }
+        res.redirect('/sellTransactions');
+      });
     }
-    res.redirect('/sellTransactions');
-  });
+  }
 };
 
 // display the previous transactions
@@ -78,6 +97,7 @@ exports.displayTransactions = (req, res) => {
   Sell.find(function (err, sell) {
     Product.find(function (err, product) {
       res.render('sellTransactions', {
+        title: 'Transactions',
         sell: sell,
         product: product,
       });
@@ -96,10 +116,9 @@ exports.displayTransactionsJSON = (req, res) => {
 exports.product_display = (req, res) => {
   Product.find()
     .then((product) => {
-      res.render('home', { title: 'Listing registrations', product });
+      res.render('home', { title: 'Store', product });
     })
     .catch(() => {
       res.send('Sorry! Something went wrong.');
     });
 };
-

@@ -40,4 +40,14 @@ body{
     .center h2{
     text-align: center;
     }
+
+    @media screen and (max-width: 450px) {
+.center{
+  width: 270px;
+  margin: auto;
+}
+.bigDiv{
+  padding: 30px;
+}
+    }
     

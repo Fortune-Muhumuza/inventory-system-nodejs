@@ -1,5 +1,5 @@
 link(rel='stylesheet' href='/css/navStyle.css')
-div.navi
+div(class="navi" id="nav")
   ul
     //- li= {if(page_name === 'about') { class="current" } }
       a(href="/about")About
@@ -14,19 +14,4 @@ div.navi
     li
       a(href='/user/logout' id="logout") Logout
 
-script.
-  const button = document.getElementById('logout');
 
-  button.addEventListener('click', async _ => {
-    try {     
-      const response = await fetch('http://localhost:3000/user/logout', {
-        method: 'post',
-        body: {
-          // Your body
-        }
-      });
-      console.log('Completed!', response);
-    } catch(err) {
-      console.error(`Error: ${err}`);
-    }
-    });

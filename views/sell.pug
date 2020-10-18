@@ -7,10 +7,10 @@ block content
             form(action="/sell" method="post")  
                 label Shoe name
                 // this will be a dropdown
-                input(type='text' required="true" name='name' class="formInput")
+                input(type='text' required="true" name='name' autocomplete="off" class="formInput")
                 br
                 label Quantity
-                input(type='number' required="true" name='quantity' class="formInput") 
+                input(type='number' required="true" name='quantity' autocomplete="off" class="formInput") 
                 br
 
                 input(type='submit' value='Sell' class="blueButton")

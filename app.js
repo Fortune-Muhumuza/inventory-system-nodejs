@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
-const session = require('express-session')
+const session = require('express-session');
 
 // Imports routes for the products
 const product = require('./routes/product.route');
@@ -14,21 +14,23 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(session({
-  name: 'sid',
-  resave: false,
-  saveUninitialized:false,
-  secret: 'secret',
-  cookie: {
-    //this is 15 hours
-    maxAge: 5.4e+7,
-    sameSite: true,
-   // secure: true
-  }
-}))
+app.use(
+  session({
+    name: 'sid',
+    resave: false,
+    saveUninitialized: false,
+    secret: 'secret',
+    cookie: {
+      //this is 15 hours
+      maxAge: 5.4e7,
+      sameSite: true,
+      // secure: true
+    },
+  })
+);
 
 app.use('/', product);
-app.use('/user/', user)
+app.use('/user/', user);
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -37,13 +39,12 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 const uri =
-  // eslint-disable-next-line max-len
   'mongodb+srv://Fort:fortune@cluster0.144qe.mongodb.net/KhanShoeCenter?retryWrites=true&w=majority';
 mongoose
   .connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: false
+    useFindAndModify: false,
   })
   .then(() => {
     console.log('Please wait while I connect to the database');
@@ -54,7 +55,6 @@ mongoose
   })
 
   .catch((err) => console.log(err));
-
 
 // start the server listening for requests
 app.listen(process.env.PORT || 3000, () => console.log('Server is running...'));

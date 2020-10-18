@@ -1,5 +1,7 @@
 html
   head
+    meta(charset='UTF-8')
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
     link(rel='stylesheet' href='/css/authstyle.css')
   body
     .bigDiv
@@ -8,7 +10,7 @@ html
         form(action='/user/login' method='post')
           label(for='fname') Name:
           br
-          input#fname(type='text' required="true" class="loginInput" name='name')
+          input#fname(type='text' required="true" autocomplete="off" class="loginInput" name='name')
           br
           label(for='lname') Password:
           br

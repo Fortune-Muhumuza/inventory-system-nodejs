@@ -1,9 +1,9 @@
 html
   head
     block head
-      title= `Khan | ${title}`
+      title= `Khan | ${title}` 
       meta(charset='UTF-8')
-      meta(name="viewport" content="width=device-width, initial-scale=1.0" )
+      meta(name="viewport" content="width=device-width, initial-scale=1.0")
       link(rel='stylesheet' href='/css/style.css')
       
 
@@ -12,4 +12,19 @@ html
     include _navbar
 
     // content
+    p
+      button(class="menu-button" onclick="showMenu()") Menu
+      button(class="menu-button" id="hideMenu" onclick="document.getElementById('nav').style.display = 'none'") Hide Menu
+  
     block content
+  script.
+    function showMenu(){
+    const menu = document.getElementById("nav")
+    menu.style.display = "block"
+    }
+
+
+
+    
+
+    
