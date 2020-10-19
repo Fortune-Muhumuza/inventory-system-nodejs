@@ -68,27 +68,23 @@ exports.product_sell1 = async (req, res) => {
       { quantity: oldProduct.quantity - req.body.quantity }
     );
 
-    if (!product) {
-      res.render('error', {
-        error: 'Sorry, the shoe you requested for is not in stock',
-      });
-    } else {
-      let sell = new Sell({
-        name: req.body.name.toLowerCase(),
-        quantity: req.body.quantity,
-        sellingPrice: oldProduct.sellingPrice,
-        paid: +oldProduct.sellingPrice * +req.body.quantity,
-        profit: +oldProduct.profit * +req.body.quantity,
-        date: dateFormat(new Date(), 'dddd-mmmm-dS-yyyy, h:MM TT'),
-      });
-      // INCASE OF ERRORS WE NEED TO FIND A WAY OF NOT CRUSHING SERVER
-      sell.save(function (err) {
-        if (err) {
-          res.send('sorry there was a problem');
-        }
-        res.redirect('/sellTransactions');
-      });
-    }
+    //there is need for functionality that returns a statement of shoe not in stock when user tries to sell a shoe that is not in store
+
+    let sell = new Sell({
+      name: req.body.name.toLowerCase(),
+      quantity: req.body.quantity,
+      sellingPrice: oldProduct.sellingPrice,
+      paid: +oldProduct.sellingPrice * +req.body.quantity,
+      profit: +oldProduct.profit * +req.body.quantity,
+      date: dateFormat(new Date(), 'dddd-mmmm-dS-yyyy, h:MM TT'),
+    });
+    // INCASE OF ERRORS WE NEED TO FIND A WAY OF NOT CRUSHING SERVER
+    sell.save(function (err) {
+      if (err) {
+        res.send('sorry there was a problem');
+      }
+      res.redirect('/sellTransactions');
+    });
   }
 };
 

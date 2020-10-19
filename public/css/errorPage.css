@@ -1,7 +1,11 @@
+*{
+    font-family: sans-serif;
+}
+
 .errorCard{
     background-color: rgb(16, 250, 55);
 padding: 10px;
-font-size: 20px;
+font-size: 16px;
 }
 
 .center {
@@ -15,7 +19,7 @@ font-size: 20px;
   @media screen and (min-width: 450px) {
 .errorCard{
     font-size: 20px;
-    background-color: red;
+    background-color: rgb(241, 88, 88);
 
 }
 .center{
