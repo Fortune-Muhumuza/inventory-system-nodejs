@@ -23,7 +23,7 @@ exports.product_buy = async function (req, res) {
     buyingValue: (+req.body.buyingPrice + +req.body.tax) * +req.body.quantity,
     tax: req.body.tax,
     buyingPrice: req.body.buyingPrice,
-    profit: +req.body.sellingPrice - (+req.body.buyingPrice + +req.body.tax),
+    profit: +req.body.sellingPrice - (+req.body.buyingPrice + (+req.body.tax/+req.body.quantity)),
     date: dateFormat(new Date(), 'dddd-mmmm-dS-yyyy, h:MM TT'),
   });
   /* this is for the cumulative quantity ..THIS IS VERY IMPORTANT AND SHOULD BE

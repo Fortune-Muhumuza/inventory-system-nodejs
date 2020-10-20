@@ -7,7 +7,6 @@
     "watch": "nodemon ./app.js",
     "pretest": "eslint --ignore-path .gitignore .",
     "heroku-postbuild": "npm run build"
-
   },
   "author": "",
   "license": "ISC",

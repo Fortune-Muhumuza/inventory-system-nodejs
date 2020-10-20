@@ -4,12 +4,15 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 const session = require('express-session');
+const morgan = require('morgan')
 
 // Imports routes for the products
 const product = require('./routes/product.route');
 const user = require('./routes/user.route');
 // initialize our express app
 const app = express();
+
+app.use(morgan('combined'))
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
