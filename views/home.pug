@@ -39,14 +39,14 @@ block content
       {
       sumVal = sumVal + parseInt(table.rows[i].cells[3].innerHTML);
       }
-      document.getElementById("val").innerHTML = "Shoes in stock = " + sumVal;
+      document.getElementById("val").innerHTML = "Shoes in stock: " + sumVal + '/=';
 
       var table = document.getElementById("table1"), sumVal = 0;
       for(var i = 1; i < table.rows.length; i++)
       {
       sumVal = sumVal + parseInt(table.rows[i].cells[8].innerHTML);
       }
-      document.getElementById("totalProfit").innerHTML = "Profit in store = " + sumVal.toLocaleString();
+      document.getElementById("totalProfit").innerHTML = "Profit in store: " + sumVal.toLocaleString() + '/=';
       
 
 

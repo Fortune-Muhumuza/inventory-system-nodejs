@@ -2,7 +2,8 @@
     margin: 0;
     padding: 0;
     width: 200px;
-    background-color: #f1f1f1;
+    background: rgb(0,212,255);
+background: linear-gradient(90deg, rgba(0,212,255,1) 0%, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 77%);
     position: fixed;
     height: 100%;
     overflow: auto;
@@ -10,14 +11,14 @@
   
   .sidebar a {
     display: block;
-    color: black;
+    color: white;
     padding: 16px;
     text-decoration: none;
   }
    
   .sidebar a.active {
     background-color: #4CAF50;
-    color: white;
+    color: red;
   }
   
   .sidebar a:hover:not(.active) {

@@ -23,7 +23,8 @@
     }
 
     #val{
-      background-color: rgb(90, 13, 235);
+      background: rgb(0,32,36);
+      background: linear-gradient(25deg, rgba(0,32,36,1) 0%, rgba(10,238,236,1) 0%, rgba(9,9,121,1) 100%);
       padding: 20px;
       width: 130px;
       box-shadow: 1px 1px 3px 1px black;
@@ -31,7 +32,8 @@
     }
 
     #totalProfit{
-      background-color: rgb(135, 0, 153);
+      background: rgb(112,20,28);
+background: linear-gradient(58deg, rgba(112,20,28,1) 0%, rgba(175,6,21,1) 41%, rgba(238,10,30,1) 69%);
       padding: 20px;
       width: 130px;
       box-shadow: 1px 1px 3px 1px black;
@@ -94,7 +96,7 @@
         padding: 8px;
       }
       
-      .table1 tr:hover {background-color: #ddd;}
+      .table1 tr:hover {background-color: rgb(247, 14, 14);}
       
       .table1 th {
         padding-top: 12px;
