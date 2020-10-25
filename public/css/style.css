@@ -7,12 +7,26 @@
     border-radius: 12px;
     }
 
+    #grid-container{
+      display: grid;
+      grid-template-columns: auto auto auto auto;
+      column-gap: 2rem;
+    }
+
     #val{
       background-color: rgb(90, 13, 235);
       padding: 20px;
-      width: 180px;
+      width: 130px;
       box-shadow: 1px 1px 3px 1px black;
       color: white;
+    }
+
+    #totalProfit{
+      background-color: rgb(135, 0, 153);
+      padding: 20px;
+      width: 130px;
+      box-shadow: 1px 1px 3px 1px black;
+      color: white; 
     }
     
     .blueButton{

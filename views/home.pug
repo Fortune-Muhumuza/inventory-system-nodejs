@@ -30,8 +30,9 @@ block content
         td(class="smallScreenHide")= products.buyingValue
         td(class="smallScreenHide")= products.profit
         td= products.profit * products.quantity
-    h4(id="val")
-    h4(id="totalProfit")
+    div(id="grid-container")
+      h4(id="val")
+      h4(id="totalProfit")
     script.
       var table = document.getElementById("table1"), sumVal = 0;
       for(var i = 1; i < table.rows.length; i++)
