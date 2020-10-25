@@ -85,7 +85,9 @@
         width: 100%;
       }
       
-      .table1 tr:nth-child(even){background-color: #f2f2f2;}
+      .table1 tr:nth-child(even){background-color: black;
+      color: rgb(50, 240, 50);
+      }
       
       .table1 td, .table1 th {
         border: 1px solid #ddd;
