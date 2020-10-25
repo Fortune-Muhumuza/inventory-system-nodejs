@@ -6,18 +6,19 @@ html
       meta(name="viewport" content="width=device-width, initial-scale=1.0")
       link(rel='stylesheet' href='/css/style.css')
       link(href="https://fonts.googleapis.com/css2?family=Commissioner&display=swap" rel="stylesheet")
-      
+
 
   body
     //header
     include _navbar
+    include _sidebar
 
     // content
     p
       button(class="menu-button" onclick="showMenu()") Menu
       button(class="menu-button" id="hideMenu" onclick="document.getElementById('nav').style.display = 'none'") Hide Menu
-  
-    block content
+    .content
+      block content
   script.
     function showMenu(){
     const menu = document.getElementById("nav")
@@ -26,6 +27,5 @@ html
 
 
 
-    
 
-    
+
