@@ -12,7 +12,7 @@ const user = require('./routes/user.route');
 // initialize our express app
 const app = express();
 
-app.use(morgan('combined'))
+//app.use(morgan('combined'))
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
