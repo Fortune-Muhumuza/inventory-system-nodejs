@@ -1,10 +1,18 @@
-body{
-    font-family: Arial, Helvetica, sans-serif;
+*{
+    font-family: 'Commissioner', sans-serif;
     }
     
     .formInput{
     width: 200px;
     border-radius: 12px;
+    }
+
+    #val{
+      background-color: rgb(90, 13, 235);
+      padding: 20px;
+      width: 180px;
+      box-shadow: 1px 1px 3px 1px black;
+      color: white;
     }
     
     .blueButton{
