@@ -8,7 +8,7 @@ router.get('/test', checkToken.checkAuth, product_controller.test);
 router.get('/', checkToken.checkAuth, product_controller.product_display);
 router.get('/sell', checkToken.checkAuth, product_controller.product_sell);
 router.get('/sellTransactions', checkToken.checkAuth, product_controller.displayTransactions);
-router.get('/sellTransactionsJSON',  product_controller.displayTransactionsJSON);
+router.get('/sellTransactionsJSON', checkToken.checkAuth, product_controller.displayTransactionsJSON);
 
 router.post('/sell', checkToken.checkAuth, product_controller.product_sell1);
 router.post('/buy', checkToken.checkAuth, product_controller.product_buy);

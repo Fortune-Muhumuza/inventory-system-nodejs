@@ -23,7 +23,9 @@ exports.product_buy = async function (req, res) {
     buyingValue: (+req.body.buyingPrice + +req.body.tax) * +req.body.quantity,
     tax: req.body.tax,
     buyingPrice: req.body.buyingPrice,
-    profit: +req.body.sellingPrice - (+req.body.buyingPrice + (+req.body.tax/+req.body.quantity)),
+    profit:
+      +req.body.sellingPrice -
+      (+req.body.buyingPrice + +req.body.tax / +req.body.quantity),
     date: dateFormat(new Date(), 'dddd-mmmm-dS-yyyy, h:MM TT'),
   });
   /* this is for the cumulative quantity ..THIS IS VERY IMPORTANT AND SHOULD BE
@@ -109,12 +111,14 @@ exports.displayTransactionsJSON = (req, res) => {
   });
 };
 
-exports.product_display = (req, res) => {
-  Product.find()
-    .then((product) => {
-      res.render('home', { title: 'Store', product });
-    })
-    .catch(() => {
-      res.send('Sorry! Something went wrong.');
+exports.product_display = async (req, res) => {
+  const product = await Product.find();
+  if (product) {
+    res.render('home', { title: 'Store', product });
+  } else {
+    res.render('error', {
+      error:
+        'Sorry, there was a problem retrieving the products from the store database',
     });
+  }
 };
