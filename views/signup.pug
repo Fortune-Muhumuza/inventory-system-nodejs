@@ -8,11 +8,15 @@ html
       .center
         h2 Signup
         form(action='/user/signup' method='post')
-          label(for='fname') Name:
+          label(for='username') Username:
           br
           input#fname(type='text' required="true" autocomplete="off" class="loginInput" name='name')
           br
-          label(for='lname') Password:
+          label(for='business name') Business name:
+          br
+          input#fname(type='text' required="true" autocomplete="off" class="loginInput" name='businessName')
+          br
+          label(for='password') Password:
           br
           input#lname(type='password' required="true" class="loginInput" name='password')
           br
