@@ -7,6 +7,7 @@ const UserSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
+    unique: true
   },
   password: {
     type: String,
@@ -17,6 +18,8 @@ const UserSchema = mongoose.Schema({
     required: true
   }
 });
+
+
 
 UserSchema.methods.correctPassword = async function (
   candidatePassword,
