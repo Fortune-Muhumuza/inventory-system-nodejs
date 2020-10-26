@@ -12,6 +12,10 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  businessName:{
+    type: String,
+    required: true
+  }
 });
 
 UserSchema.methods.correctPassword = async function (

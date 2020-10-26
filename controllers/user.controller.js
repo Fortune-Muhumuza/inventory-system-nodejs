@@ -16,6 +16,7 @@ exports.postSignup = async (req, res) => {
     const user = new User({
       name: req.body.name.toUpperCase(),
       password: hashedPassword,
+      businessName: req.body.businessName
     });
     await user.save();
     console.log(user)
