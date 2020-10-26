@@ -11,35 +11,40 @@ exports.login = (req, res) => {
 };
 
 exports.postSignup = async (req, res) => {
-  
+  let name = req.body.name;
+
+  const checkUser = await User.find({ name });
+  if (!checkUser) {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = new User({
       name: req.body.name.toUpperCase(),
       password: hashedPassword,
-      businessName: req.body.businessName
+      businessName: req.body.businessName,
     });
     await user.save();
-    console.log(user)
+    console.log(user);
     res.redirect('/user/login');
-   
- 
-  
+  }
+
+  res.render('error', {
+    error: 'Sorry, that name is already taken',
+  });
 };
 
 exports.postLogin = async (req, res) => {
   let { password } = req.body;
-  let name = req.body.name.toUpperCase()
+  let name = req.body.name.toUpperCase();
 
-    // 1) Check if email and password exist
-    if (!name || !password) {
-      res.render('error', {error: 'PLease enter name and password'})
-    }
-    // 2) Check if user exists && password is correct
-    const user = await User.findOne({ name }).select('+password');
-  
-    if (!user || !(await user.correctPassword(password, user.password))) {
-      res.render('error', {error: 'wrong name or password'})
-    }
+  // 1) Check if email and password exist
+  if (!name || !password) {
+    res.render('error', { error: 'PLease enter name and password' });
+  }
+  // 2) Check if user exists && password is correct
+  const user = await User.findOne({ name }).select('+password');
+
+  if (!user || !(await user.correctPassword(password, user.password))) {
+    res.render('error', { error: 'wrong name or password' });
+  }
 
   req.session.userId = user._id;
 
