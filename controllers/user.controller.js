@@ -11,36 +11,34 @@ exports.login = (req, res) => {
 };
 
 exports.postSignup = async (req, res) => {
-  try {
+  
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = new User({
       name: req.body.name.toUpperCase(),
       password: hashedPassword,
     });
-    user.save();
+    await user.save();
+    console.log(user)
     res.redirect('/user/login');
-  } catch {
-    res.redirect('/signup');
-  }
+   
+ 
+  
 };
 
 exports.postLogin = async (req, res) => {
-  let { name, password } = req.body;
-  if (!name || !password) res.json('please provide name and password', 400);
-  const user = await User.findOne({ name });
+  let { password } = req.body;
+  let name = req.body.name.toUpperCase()
 
-  const match = await bcrypt.compare(password, user.password);
-
-  // if (
-  //   !(req.body.name === user.name) ||
-  //   !(req.body.password === user.password)
-  // )
-  if (!match) {
-    res.render('error', {error: 'The password you have entered is incorrect'});
-  }
-  if (!(name === user.name)) {
-    res.render('error', { error: 'Sorry, user not found' });
-  }
+    // 1) Check if email and password exist
+    if (!name || !password) {
+      res.render('error', {error: 'PLease enter name and password'})
+    }
+    // 2) Check if user exists && password is correct
+    const user = await User.findOne({ name }).select('+password');
+  
+    if (!user || !(await user.correctPassword(password, user.password))) {
+      res.render('error', {error: 'wrong name or password'})
+    }
 
   req.session.userId = user._id;
 
