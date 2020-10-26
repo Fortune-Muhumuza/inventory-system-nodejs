@@ -1,9 +1,12 @@
 extends base
 
 block content
+  #chartContainer(style='height: 300px; width: 100%;')
+  script(src='https://canvasjs.com/assets/script/jquery-1.11.1.min.js')
+  script(src='https://canvasjs.com/assets/script/canvasjs.min.js')
 
   h2 Sale Transactions
-  button(onclick='display()' class="blueButton") Print records
+  button(onclick='display()' class="blueButton" style="width:100px") Print records
   br
   table( id="table1" class="table1")
     tr
@@ -48,7 +51,7 @@ block content
     sumVal = sumVal + parseInt(table.rows[i].cells[4].innerHTML);
     }
     document.getElementById("val").innerHTML = "Total profit = " + sumVal.toLocaleString();
-    console.log(sumVal);
+    //- console.log(sumVal);
 
 
     var totalShoes = document.getElementById("table1"), Total = 0;
@@ -70,9 +73,44 @@ block content
     window.print();
     }
 
-    function display() {
-    window.print();
+
+    window.onload = function() {
+    var dataPoints = [];
+    var chart = new CanvasJS.Chart("chartContainer", {
+    animationEnabled: true,
+    theme: "light2",
+    title: {
+    text: "Daily Sales Data"
+    },
+    axisY: {
+    title: "Quantity",
+    titleFontSize: 24,
+    includeZero: true
+    },
+    axisX: {
+      title: "Name",
+      titleFontSize: 24,
+
+    },
+    data: [{
+    type: "column",
+    yValueFormatString: "#,### Units",
+    dataPoints: dataPoints
+    }]
+    });
+    function addData(data) {
+    for (var i = 0; i < data.length; i++) {
+      console.log(data[i].name)
+    dataPoints.push({
+    label: data[i].name,
+    y: data[i].quantity
+    });
     }
+    chart.render();
+    }
+    $.getJSON("http://localhost:3000/sellTransactionsJSON", addData);
+    }
+
 
 
 

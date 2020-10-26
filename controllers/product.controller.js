@@ -103,12 +103,16 @@ exports.displayTransactions = (req, res) => {
   });
 };
 
-exports.displayTransactionsJSON = (req, res) => {
-  Sell.find(function (err, sell) {
-    Product.find(function (err, product) {
-      return res.json({ sell });
-    });
-  });
+exports.displayTransactionsJSON = async(req, res) => {
+  //select helps to filter out specific data
+  const sells = await Sell.find({}).select('name quantity -_id')
+  res.json(sells)
+  
+  // Sell.find(function (err, sell) {
+  //   Product.find(function (err, product) {
+  //     return res.json({ sell });
+  //   });
+  // });
 };
 
 exports.product_display = async (req, res) => {
