@@ -19,6 +19,7 @@ exports.product_buy = async function (req, res) {
     //decided to use lower case instead
     sellingPrice: req.body.sellingPrice,
     quantity: req.body.quantity,
+    permanentQuantityBought: req.body.quantity,
     cumulativeQuantity: req.body.quantity,
     buyingValue: (+req.body.buyingPrice + +req.body.tax) * +req.body.quantity,
     tax: req.body.tax,
@@ -75,6 +76,7 @@ exports.product_sell1 = async (req, res) => {
     let sell = new Sell({
       name: req.body.name.toLowerCase(),
       quantity: req.body.quantity,
+      permanentQuantitySold: req.body.quantity,
       sellingPrice: oldProduct.sellingPrice,
       paid: +oldProduct.sellingPrice * +req.body.quantity,
       profit: +oldProduct.profit * +req.body.quantity,
@@ -126,3 +128,8 @@ exports.product_display = async (req, res) => {
     });
   }
 };
+
+exports.getPermanentRecords = async(req, res) => {
+  const product = await Product.find({}).select('name permanentQuantityBought -_id')
+  res.json(product)
+}

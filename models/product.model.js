@@ -6,6 +6,7 @@ let ProductSchema = new Schema({
   name: { type: String, required: true, max: 100 },
   quantity: { type: Number, required: true },
   cumulativeQuantity: { type: Number, required: true },
+  permanentQuantityBought: {type: Number, required: true},
   buyingValue: { type: Number, required: true },
   tax: { type: Number, required: true },
   buyingPrice: { type: Number, required: true },
