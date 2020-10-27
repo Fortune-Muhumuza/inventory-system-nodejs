@@ -129,7 +129,21 @@ exports.product_display = async (req, res) => {
   }
 };
 
+exports.displaySingleProduct = async(req, res) => {
+  const product = await Product.findById(req.params.id)
+  //.select('name _id')
+
+  console.log(product)
+  res.render('singleProduct', {product: product})
+}
+
+//cumulative quantity already catered  for this but this is also fine
 exports.getPermanentRecords = async(req, res) => {
   const product = await Product.find({}).select('name permanentQuantityBought -_id')
   res.json(product)
+}
+
+exports.deleteStoreRecord = async(req, res) => {
+  const product = await Product.findByIdAndDelete(req.params.id)
+  res.redirect('/')
 }
