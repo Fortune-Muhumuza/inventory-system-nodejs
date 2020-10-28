@@ -13,10 +13,14 @@ exports.login = (req, res) => {
 exports.postSignup = async (req, res) => {
   const formName = req.body.name.toUpperCase();
 
-  const checkUser = await User.findOne({name: formName}).exec();
+  const checkUser = await User.findOne({ name: formName }).exec();
   //console.log(checkUser);
 
-  if (checkUser.name !== req.body.name.toUpperCase()) {
+  if (checkUser) {
+    res.render('error', {
+      error: 'Sorry, that name is already taken',
+    });
+  } else {
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     const user = new User({
       name: req.body.name.toUpperCase(),
@@ -27,10 +31,6 @@ exports.postSignup = async (req, res) => {
     console.log(savedUser);
     res.redirect('/user/login');
   }
-
-  res.render('error', {
-    error: 'Sorry, that name is already taken',
-  });
 };
 
 exports.postLogin = async (req, res) => {
@@ -47,6 +47,7 @@ exports.postLogin = async (req, res) => {
   if (!user || !(await user.correctPassword(password, user.password))) {
     res.render('error', { error: 'wrong name or password' });
   }
+  
 
   req.session.userId = user._id;
 
