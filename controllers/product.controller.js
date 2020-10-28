@@ -14,7 +14,7 @@ exports.product_buy = async function (req, res) {
   // querying the DB to see if the product exists already
   // if it does ill just increase its amount
 
-  const checkProduct = await Product.findOne({}).exec
+ 
 
   let product = new Product({
     name: req.body.name.toLowerCase(),
