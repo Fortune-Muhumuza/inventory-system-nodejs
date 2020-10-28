@@ -11,28 +11,27 @@ exports.login = (req, res) => {
 };
 
 exports.postSignup = async (req, res) => {
-  
+  const formName = req.body.name.toUpperCase();
 
-  const checkUser =  await User.findOne({name})
-  console.log(checkUser)
-  
-  if(checkUser.name !== req.body.name.toUpperCase()){
-  const hashedPassword = await bcrypt.hash(req.body.password, 10);
-  const user = new User({
-    name: req.body.name.toUpperCase(),
-    password: hashedPassword,
-    businessName: req.body.businessName,
-  });
-  const savedUser = await user.save();
-  //console.log(savedUser);
-  res.redirect('/user/login');
-}
+  const checkUser = await User.findOne({name: formName}).exec();
+  //console.log(checkUser);
+
+  if (checkUser.name !== req.body.name.toUpperCase()) {
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const user = new User({
+      name: req.body.name.toUpperCase(),
+      password: hashedPassword,
+      businessName: req.body.businessName,
+    });
+    const savedUser = await user.save();
+    console.log(savedUser);
+    res.redirect('/user/login');
+  }
 
   res.render('error', {
     error: 'Sorry, that name is already taken',
   });
-}
-;
+};
 
 exports.postLogin = async (req, res) => {
   let { password } = req.body;
