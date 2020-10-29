@@ -149,3 +149,13 @@ exports.deleteStoreRecord = async(req, res) => {
   const product = await Product.findByIdAndDelete(req.params.id)
   res.redirect('/')
 }
+
+exports.displaySingleSaleRecord = async(req, res) => {
+  const sell = await Sell.findById(req.params.id)
+  res.render('singleSaleRecord', {sell: sell})
+}
+
+exports.deleteSaleRecord =async(req, res) => {
+  const sell = await Sell.findByIdAndDelete(req.params.id)
+  res.redirect('/sellTransactions')
+}
