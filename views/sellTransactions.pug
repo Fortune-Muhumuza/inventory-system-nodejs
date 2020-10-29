@@ -1,7 +1,7 @@
 extends base
 
 block content
-  #chartContainer(style='height: 300px; width: 100%;')
+
   script(src='https://canvasjs.com/assets/script/jquery-1.11.1.min.js')
   script(src='https://canvasjs.com/assets/script/canvasjs.min.js')
 
@@ -18,7 +18,8 @@ block content
       th(class="tableDate") Date sold
     each sells in sell
       tr
-        td= sells.name
+        td
+          a(href=`http://localhost:3000/singleSaleRecord/${sells._id}`)= sells.name
         td= sells.quantity
         td(class="smallScreenHide")= sells.sellingPrice
         td(class="smallScreenHide")= sells.paid
@@ -37,12 +38,15 @@ block content
       th(class="tableDate") Date bought 
     each products in product
       tr
-        td(id="pName")= products.name
+        td
+          a(href=`http://localhost:3000/singleProduct/${products._id}` id="pName")= products.name
         td= products.cumulativeQuantity
         td= products.buyingPrice
         td(class="tableDate")= products.date
 
   h3(id="shoesBought")
+
+  #chartContainer(style='height: 300px; width: 100%;')
 
   script.
     var table = document.getElementById("table1"), sumVal = 0;
