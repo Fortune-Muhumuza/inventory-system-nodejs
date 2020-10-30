@@ -1,5 +1,8 @@
 html
-    h2= product.name
-    p= product._id
-    button
-        a(href=`http://localhost:3000/deleteRecord/${product._id}`) Delete
+    link(rel='stylesheet' href='/css/singleProduct.css')
+    .card
+        h2(class="product-name")= product.name
+        p(class="text")= `Are you sure you want to delete ${product.name}`
+  
+        button(class="delete-button")
+            a(href=`http://localhost:3000/deleteRecord/${product._id}`) Delete
