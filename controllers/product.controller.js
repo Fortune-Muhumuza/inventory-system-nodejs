@@ -77,6 +77,7 @@ exports.product_sell1 = async (req, res) => {
     //there is need for functionality that returns a statement of shoe not in stock when user tries to sell a shoe that is not in store
 
     let sell = new Sell({
+      userId: req.session.user._id,
       name: req.body.name.toLowerCase(),
       quantity: req.body.quantity,
       permanentQuantitySold: req.body.quantity,
@@ -96,22 +97,24 @@ exports.product_sell1 = async (req, res) => {
 };
 
 // display the previous transactions
-exports.displayTransactions = (req, res) => {
-  Sell.find(function (err, sell) {
-    Product.find(function (err, product) {
+exports.displayTransactions = async(req, res) => {
+  const sell = await Sell.find({userId: req.session.user._id})
+  const product = await Product.find({userId: req.session.user._id})
+  // Sell.find(function (err, sell) {
+  //   Product.find(function (err, product) {
       res.render('sellTransactions', {
         title: 'Transactions',
         sell: sell,
         product: product,
         name: req.session.user.businessName
       });
-    });
-  });
+  //   });
+  // });
 };
 
 exports.displayTransactionsJSON = async(req, res) => {
   //select helps to filter out specific data
-  const sells = await Sell.find({}).select('name quantity -_id')
+  const sells = await Sell.find({userId: req.session.user._id}).select('name quantity -_id')
   res.json(sells)
   
   // Sell.find(function (err, sell) {
@@ -143,7 +146,7 @@ exports.displaySingleProduct = async(req, res) => {
 
 //cumulative quantity already catered  for this but this is also fine
 exports.getPermanentRecords = async(req, res) => {
-  const product = await Product.find({}).select('name permanentQuantityBought -_id')
+  const product = await Product.find({userId: req.session.user._id}).select('name permanentQuantityBought -_id')
   res.json(product)
 }
 
