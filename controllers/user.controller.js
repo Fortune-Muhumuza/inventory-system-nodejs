@@ -28,7 +28,7 @@ exports.postSignup = async (req, res) => {
       businessName: req.body.businessName,
     });
     const savedUser = await user.save();
-    console.log(savedUser);
+    //console.log(savedUser);
     res.redirect('/user/login');
   }
 };
@@ -47,10 +47,9 @@ exports.postLogin = async (req, res) => {
   if (!user || !(await user.correctPassword(password, user.password))) {
     res.render('error', { error: 'wrong name or password' });
   }
-  
 
-  req.session.userId = user._id;
-
+  req.session.user = user;
+  //console.log(req.session.user)
   res.redirect('/');
 };
 

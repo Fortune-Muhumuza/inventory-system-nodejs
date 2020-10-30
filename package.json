@@ -8,6 +8,10 @@
     "pretest": "eslint --ignore-path .gitignore .",
     "heroku-postbuild": "npm run build"
   },
+  "pkg": {
+    "scripts": "build/**/*.js",
+    "assets": "views/**/*"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {

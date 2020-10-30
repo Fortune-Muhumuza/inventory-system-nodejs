@@ -6,7 +6,7 @@ const Sell = require('../models/sellTransactions');
 
 // Simple version, without validation or sanitation
 exports.test = function (req, res) {
-  res.render('index');
+  res.render('index', {name: req.session.user.businessName});
 };
 
 exports.product_buy = async function (req, res) {
@@ -17,6 +17,7 @@ exports.product_buy = async function (req, res) {
  
 
   let product = new Product({
+    userId: req.session.user._id,
     name: req.body.name.toLowerCase(),
     //decided to use lower case instead
     sellingPrice: req.body.sellingPrice,
@@ -48,7 +49,7 @@ exports.product_buy = async function (req, res) {
 };
 
 exports.product_sell = (req, res) => {
-  res.render('sell', { page_name: 'sell' });
+  res.render('sell', { page_name: 'sell', name: req.session.user.name });
 };
 
 exports.product_sell1 = async (req, res) => {
@@ -102,6 +103,7 @@ exports.displayTransactions = (req, res) => {
         title: 'Transactions',
         sell: sell,
         product: product,
+        name: req.session.user.businessName
       });
     });
   });
@@ -120,9 +122,9 @@ exports.displayTransactionsJSON = async(req, res) => {
 };
 
 exports.product_display = async (req, res) => {
-  const product = await Product.find();
+  const product = await Product.find({userId: req.session.user._id});
   if (product) {
-    res.render('home', { title: 'Store', product });
+    res.render('home', { title: 'Store', product, name: req.session.user.businessName });
   } else {
     res.render('error', {
       error:
