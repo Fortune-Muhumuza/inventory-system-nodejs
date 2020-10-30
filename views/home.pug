@@ -29,7 +29,7 @@ block content
           = products.quantity * products.sellingPrice
 
         td(class="smallScreenHide")= products.buyingValue
-        td(class="smallScreenHide")= products.profit
+        td(class="smallScreenHide")= Math.round(products.profit)
         td= products.profit * products.quantity
     div(id="grid-container")
       h4(id="val")

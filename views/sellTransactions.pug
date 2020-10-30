@@ -23,7 +23,7 @@ block content
         td= sells.quantity
         td(class="smallScreenHide")= sells.sellingPrice
         td(class="smallScreenHide")= sells.paid
-        td= sells.profit
+        td= Math.round(sells.profit)
         td(class="tableDate")= sells.date
   h3(id="val") 
   h3(id="val2")

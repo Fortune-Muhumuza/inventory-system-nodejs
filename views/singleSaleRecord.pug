@@ -2,7 +2,7 @@ html
     link(rel='stylesheet' href='/css/singleProduct.css')
     .card
         h2(class="product-name")= sell.name
-        p(class="text")= `Are you sure you want to delete ${product.name}`
+        p(class="text")= `Are you sure you want to delete ${sell.name}`
    
         button(class="delete-button")
             a(href=`http://localhost:3000/deleteSaleRecord/${sell._id}`) Delete
