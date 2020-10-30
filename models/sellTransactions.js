@@ -10,6 +10,11 @@ let SellTransaction = new Schema({
   paid: { type: Number, required: true },
   profit: { type: Number, required: true },
   date: { type: String, required: true },
+  userId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 });
 
 // Export the model
