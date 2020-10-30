@@ -24,7 +24,7 @@ exports.product_buy = async function (req, res) {
     quantity: req.body.quantity,
     permanentQuantityBought: req.body.quantity,
     cumulativeQuantity: req.body.quantity,
-    buyingValue: (+req.body.buyingPrice + +req.body.tax) * +req.body.quantity,
+    buyingValue: ((+req.body.buyingPrice) + (+req.body.tax / +req.body.quantity)) * +req.body.quantity,
     tax: req.body.tax,
     buyingPrice: req.body.buyingPrice,
     profit:
