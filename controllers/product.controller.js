@@ -135,7 +135,7 @@ exports.displaySingleProduct = async(req, res) => {
   const product = await Product.findById(req.params.id)
   //.select('name _id')
 
-  console.log(product)
+  //console.log(product)
   res.render('singleProduct', {product: product})
 }
 

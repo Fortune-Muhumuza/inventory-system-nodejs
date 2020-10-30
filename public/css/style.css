@@ -23,16 +23,17 @@
     }
 
     #val{
-      background: rgb(20,112,105);
-      background: linear-gradient(58deg, rgba(20,112,105,1) 0%, rgba(109,222,223,1) 0%, rgba(10,233,238,1) 73%);
+      background-color: #ffffff; 
+      border-radius: 1px;
+      border-color: #00ff00;
       padding: 20px;
       width: 130px;
       box-shadow: 1px 1px 3px 1px black;
-      color: white;
+      color: rgb(0, 0, 0);
     }
 
     #totalProfit{
-    background-color: #ffff00;
+    background-color: #00ff15;
       padding: 20px;
       width: 130px;
       box-shadow: 1px 1px 3px 1px black;
