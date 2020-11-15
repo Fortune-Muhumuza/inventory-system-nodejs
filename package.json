@@ -1,16 +1,17 @@
 {
-  "name": "crud",
+  "name": "Khan",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "watch": "nodemon ./app.js",
     "pretest": "eslint --ignore-path .gitignore .",
     "heroku-postbuild": "npm run build"
   },
-  "pkg": {
-    "scripts": "build/**/*.js",
-    "assets": "views/**/*"
+  "bin": "app.js",
+  "pkg": { 
+    
+    "assets": [ "assets/**/*", "views" ]
   },
   "author": "",
   "license": "ISC",

@@ -23,21 +23,21 @@
     }
 
     #val{
-      background-color: #ffffff; 
+      background-color: rgb(69, 123, 157); 
       border-radius: 1px;
       border-color: #00ff00;
       padding: 20px;
       width: 130px;
       box-shadow: 1px 1px 3px 1px black;
-      color: rgb(0, 0, 0);
+      color: rgb(255, 255, 255);
     }
 
     #totalProfit{
-    background-color: #00ff15;
+    background-color: #1D3557;
       padding: 20px;
       width: 130px;
       box-shadow: 1px 1px 3px 1px black;
-      color: black; 
+      color: rgb(255, 255, 255); 
     }
     
     .blueButton{
@@ -87,7 +87,7 @@
         width: 100%;
       }
       
-      .table1 tr:nth-child(even){background-color: #f5ccff;
+      .table1 tr:nth-child(even){background-color: #F1FAEE;
       color: black;
       }
       
@@ -102,8 +102,8 @@
         padding-top: 12px;
         padding-bottom: 12px;
         text-align: left;
-        background-color: dodgerblue;
-        color: white;
+        background-color: #A8DADC;
+        color: rgb(0, 0, 0);
       }
     
         body{

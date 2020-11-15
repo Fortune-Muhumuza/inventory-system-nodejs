@@ -4,11 +4,12 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 const session = require('express-session');
-const morgan = require('morgan');
+//const morgan = require('morgan');
 
 // Imports routes for the products
 const product = require('./routes/product.route');
 const user = require('./routes/user.route');
+const admin = require('./routes/admin.route');
 // initialize our express app
 const app = express();
 
@@ -44,10 +45,12 @@ app.use(
 
 app.use('/', product);
 app.use('/user/', user);
+app.use('/area51/admin/', admin);
 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.engine('pug', require('pug').__express);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
@@ -61,13 +64,16 @@ mongoose
   })
 
   .then(() => {
-    console.log('MongoDB Connected…');
+    console.log('Database Connected');
   })
 
   .catch((err) => console.log(err));
 
+
 // start the server listening for requests
-app.listen(process.env.PORT || 3000, () => console.log(`Server is running on 3000`));
+app.listen(process.env.PORT || 3000, () =>
+  console.log(`The program is running`)
+);
 
 // app.listen(port, () => {
 //   console.log('Server is up and running on port numner ' + port);
