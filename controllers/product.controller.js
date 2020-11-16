@@ -124,6 +124,12 @@ exports.displayTransactionsJSON = async(req, res) => {
   // });
 };
 
+//get data for generating the store graph
+exports.displayStoreGraphData = async(req, res) => {
+  const products = await Product.find({}).select('name quantity -_id')
+  res.json(products)
+}
+
 exports.product_display = async (req, res) => {
   const product = await Product.find({userId: req.session.user._id});
   if (product) {

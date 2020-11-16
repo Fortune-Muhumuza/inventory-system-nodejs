@@ -60,7 +60,7 @@ block content
       animationEnabled: true,
       theme: "light2",
       title: {
-      text: "Daily Sales Data"
+      text: "Store data"
       },
       axisY: {
       title: "Quantity",
@@ -88,7 +88,7 @@ block content
       }
       chart.render();
       }
-      $.getJSON("http://localhost:3000/sellTransactionsJSON", addData);
+      $.getJSON("http://localhost:3000/storedatajson", addData);
       }
 
 
