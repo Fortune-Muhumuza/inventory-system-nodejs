@@ -34,6 +34,9 @@ block content
     div(id="grid-container")
       h4(id="val")
       h4(id="totalProfit")
+    br
+
+  #chartContainer(style='height: 300px; width: 100%;')
     script.
       var table = document.getElementById("table1"), sumVal = 0;
       for(var i = 1; i < table.rows.length; i++)
@@ -51,10 +54,42 @@ block content
 
       //document.getElementById('deleteRecord').addEventListener('click', deletePost);
 
-      function deletePost() {       
-          fetch('http://localhost:3000/singleProduct')
-          .then(response => response.json())
-            }
+      window.onload = function() {
+      var dataPoints = [];
+      var chart = new CanvasJS.Chart("chartContainer", {
+      animationEnabled: true,
+      theme: "light2",
+      title: {
+      text: "Daily Sales Data"
+      },
+      axisY: {
+      title: "Quantity",
+      titleFontSize: 24,
+      includeZero: true
+      },
+      axisX: {
+        title: "Name",
+        titleFontSize: 24,
+
+      },
+      data: [{
+      type: "column",
+      yValueFormatString: "#,### Units",
+      dataPoints: dataPoints
+      }]
+      });
+      function addData(data) {
+      for (var i = 0; i < data.length; i++) {
+        console.log(data[i].name)
+      dataPoints.push({
+      label: data[i].name,
+      y: data[i].quantity
+      });
+      }
+      chart.render();
+      }
+      $.getJSON("http://localhost:3000/sellTransactionsJSON", addData);
+      }
 
 
 
