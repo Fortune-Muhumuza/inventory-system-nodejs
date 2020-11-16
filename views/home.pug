@@ -34,8 +34,9 @@ block content
     div(id="grid-container")
       h4(id="val")
       h4(id="totalProfit")
-    br
-
+  br
+  button(onclick='graph()' class="blueButton" style="width:170px") Generate graph
+  br
   #chartContainer(style='height: 300px; width: 100%;')
     script.
       var table = document.getElementById("table1"), sumVal = 0;
@@ -54,7 +55,7 @@ block content
 
       //document.getElementById('deleteRecord').addEventListener('click', deletePost);
 
-      window.onload = function() {
+      function graph() {
       var dataPoints = [];
       var chart = new CanvasJS.Chart("chartContainer", {
       animationEnabled: true,
