@@ -35,7 +35,7 @@ block content
       h4(id="val")
       h4(id="totalProfit")
   br
-  button(onclick='graph()' class="blueButton" style="width:170px") Generate graph
+  button(onclick='generateStoreGraph()' class="blueButton" style="width:170px") Generate graph
   br
   #chartContainer(style='height: 300px; width: 100%;')
     script.
@@ -55,42 +55,7 @@ block content
 
       //document.getElementById('deleteRecord').addEventListener('click', deletePost);
 
-      function graph() {
-      var dataPoints = [];
-      var chart = new CanvasJS.Chart("chartContainer", {
-      animationEnabled: true,
-      theme: "light2",
-      title: {
-      text: "Store data"
-      },
-      axisY: {
-      title: "Quantity",
-      titleFontSize: 24,
-      includeZero: true
-      },
-      axisX: {
-        title: "Name",
-        titleFontSize: 24,
-
-      },
-      data: [{
-      type: "column",
-      yValueFormatString: "#,### Units",
-      dataPoints: dataPoints
-      }]
-      });
-      function addData(data) {
-      for (var i = 0; i < data.length; i++) {
-        console.log(data[i].name)
-      dataPoints.push({
-      label: data[i].name,
-      y: data[i].quantity
-      });
-      }
-      chart.render();
-      }
-      $.getJSON("http://localhost:3000/storedatajson", addData);
-      }
+   
 
 
 

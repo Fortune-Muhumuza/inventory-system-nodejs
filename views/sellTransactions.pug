@@ -5,7 +5,7 @@ block content
 
 
   h2 Sale Transactions
-  button(onclick='display()' class="blueButton" style="width:100px") Print records
+  button(onclick='printTransactions()' class="blueButton" style="width:100px") Print records
   br
   table( id="table1" class="table1")
     tr
@@ -73,9 +73,6 @@ block content
     document.getElementById("shoesBought").innerHTML = "Total shoes bought = " + sum;
 
 
-    function display() {
-    window.print();
-    }
 
 
    

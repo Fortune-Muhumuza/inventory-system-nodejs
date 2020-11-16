@@ -1,0 +1,3 @@
+function printTransactions() {
+  window.print();
+}
