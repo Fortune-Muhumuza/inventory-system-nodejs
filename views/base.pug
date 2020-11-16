@@ -6,6 +6,8 @@ html
       meta(name="viewport" content="width=device-width, initial-scale=1.0")
       link(rel='stylesheet' href='/css/style.css')
       link(href="https://fonts.googleapis.com/css2?family=Commissioner&display=swap" rel="stylesheet")
+      link(rel="preconnect" href="https://fonts.gstatic.com")
+      link(href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet")
       script(src='/js/index.js')
       script(src='/js/graphs.js')
       script(src='https://canvasjs.com/assets/script/jquery-1.11.1.min.js')
@@ -18,10 +20,8 @@ html
     include _sidebar
 
     // content
-    h3 Logged in as
+ 
     p
-      button(class="menu-button" onclick="showMenu()") Menu
-      button(class="menu-button" id="hideMenu" onclick="document.getElementById('nav').style.display = 'none'") Hide Menu
     .content
       block content
   script.

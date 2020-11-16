@@ -3,9 +3,11 @@ html
     meta(charset='UTF-8')
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     link(rel='stylesheet' href='/css/authStyle.css')
+    script(src="https://kit.fontawesome.com/c45f0d49ca.js" crossorigin="anonymous")
   body
     .bigDiv
       .center
+        img(src="/img/logo.png", alt="")
         h2 Signup
         form(action='/user/signup' method='post')
           label(for='username') Username:

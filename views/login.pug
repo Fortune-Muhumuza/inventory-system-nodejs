@@ -3,20 +3,23 @@ html
     meta(charset='UTF-8')
     meta(name="viewport" content="width=device-width, initial-scale=1.0")
     link(rel='stylesheet' href='/css/authStyle.css')
+    script(src="https://kit.fontawesome.com/c45f0d49ca.js" crossorigin="anonymous")
   body
     .bigDiv
       .center
-        h2 Login
+        img(src="/img/logo.png", alt="")
+    
         form(action='/user/login' method='post')
-          label(for='fname') Name:
+
           br
-          input#fname(type='text' required="true" autocomplete="off" class="loginInput" name='name')
+          .div
+            
+              input#fname(type='text' required="true" autocomplete="off" class="loginInput" name='name' placeholder="Name")
           br
-          label(for='lname') Password:
-          br
-          input#lname(type='password' required="true" class="loginInput" name='password')
+          .div
+              input#lname(type='password' required="true" class="loginInput" name='password' placeholder="Password")
           br
           //- p Not registered? 
           //-   a(href="http://localhost:3000/user/signup") create an account here
-          br
+        
           input(type='submit' class="loginButton" value='Login')
