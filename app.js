@@ -54,21 +54,14 @@ app.engine('pug', require('pug').__express);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-const uri = 'mongodb://localhost:27017/invsystem';
+const uri = 
+ 'mongodb://localhost:27017/invsystem';
 //'mongodb+srv://Fort:fortune@cluster0.144qe.mongodb.net/KhanShoeCenter?retryWrites=true&w=majority';
-mongoose
-  .connect(uri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-  })
-
-  .then(() => {
-    console.log('Database Connected');
-  })
-
-  .catch((err) => console.log(err));
-
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+});
 
 // start the server listening for requests
 app.listen(process.env.PORT || 3000, () =>
