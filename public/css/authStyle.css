@@ -1,5 +1,8 @@
+
 body{
     font-family: Arial, Helvetica, sans-serif;
+    background: rgb(194,211,214);
+    background: linear-gradient(83deg, rgba(194,211,214,1) 8%, rgba(226,224,236,1) 42%, rgba(206,208,217,1) 100%);
     }
 
     .div{
@@ -48,6 +51,8 @@ body{
       padding-bottom: 20px;
       border-radius: 10px;
       box-shadow: 1px 1px 15px 1px black;
+      background-color: white;
+      opacity: 0.9;
     }
     .center h2{
     text-align: center;

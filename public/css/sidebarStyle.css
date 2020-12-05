@@ -9,8 +9,7 @@
     margin: 0;
     padding: 0;
     width: 200px;
-    background-color: #4e73df;
-    background-image: linear-gradient(180deg,#4e73df 10%,#224abe 100%);
+    background-color: #0096c7;
     position: fixed;
     height: 100%;
     overflow: auto;
@@ -21,6 +20,7 @@
     color: white;
     padding: 16px;
     text-decoration: none;
+    transition: 0.5s;
   }
    
   .sidebar a.active {
@@ -29,6 +29,6 @@
   }
   
   .sidebar a:hover:not(.active) {
-    background-color: #555;
-    color: white;
+    background-color: #90e0ef;
+    color: #e80c04;
   }
