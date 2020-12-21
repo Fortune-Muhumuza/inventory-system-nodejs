@@ -22,6 +22,7 @@ body{
       color: green;
       outline: none;
       background-color: lavenderblush;
+      border-bottom: 5px solid greenyellow;
     }
     
     .loginButton{
@@ -39,23 +40,25 @@ body{
     }
     
     .bigDiv{
-    padding: 60px;
+    margin-top: 100px;
     }
+
     .center {
       margin: auto;
       width: 300px;
       border: 0.1px solid dodgerblue;
-      padding-top: 10px;
-      padding-right: 20px;
-      padding-left: 20px;
-      padding-bottom: 20px;
+      padding: 20px 30px;
       border-radius: 10px;
       box-shadow: 1px 1px 15px 1px black;
       background-color: white;
       opacity: 0.9;
     }
-    .center h2{
-    text-align: center;
+    
+
+    .center-content {
+      padding: 10px 20px;
+     margin-left: 10px;
+      text-align: center;
     }
 
     @media screen and (max-width: 450px) {
