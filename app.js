@@ -45,6 +45,8 @@ app.use(
 
 app.use('/', product);
 app.use('/user/', user);
+
+//dashboard
 app.use('/area51/admin/', admin);
 
 app.use(express.static('public'));

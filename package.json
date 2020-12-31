@@ -9,9 +9,11 @@
     "heroku-postbuild": "npm run build"
   },
   "bin": "app.js",
-  "pkg": { 
-    
-    "assets": [ "assets/**/*", "views" ]
+  "pkg": {
+    "assets": [
+      "assets/**/*",
+      "views"
+    ]
   },
   "author": "",
   "license": "ISC",
