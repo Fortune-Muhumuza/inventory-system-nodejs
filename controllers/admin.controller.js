@@ -6,7 +6,8 @@ exports.getLogin = (req, res) => {
 
 exports.getDashboard = async(req, res) => {
 const users = await User.find()
-    res.json(users.length)
+    res.json(`${users.length} businesses registered`)
+    
 }
 
 exports.deleteBusiness = async(req, res) => {

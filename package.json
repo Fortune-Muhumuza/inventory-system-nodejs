@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "watch": "nodemon ./app.js",
+    "start": "nodemon ./app.js",
     "pretest": "eslint --ignore-path .gitignore .",
     "heroku-postbuild": "npm run build"
   },
@@ -37,6 +37,7 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.4",
     "pug": "^3.0.0",
+    "qr-scanner": "^1.2.0",
     "validator": "^13.1.1"
   }
 }

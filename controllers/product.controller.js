@@ -57,15 +57,15 @@ exports.product_sell1 = async (req, res) => {
     name: req.body.name.toLowerCase(),
   });
 
-  // this checks if there are still shoes of that brand or model in stock and does the needful
+  // this checks if there are still items of that brand or model in stock and does the needful
 
   if (oldProduct.quantity <= 0) {
-    res.render('error', { error: 'Sorry, this shoe is out of stock' });
+    res.render('error', { error: 'Sorry, this item is out of stock' });
   }
   if (req.body.quantity > oldProduct.quantity) {
     res.render('error', {
       error:
-        'Sorry, the quantity of shoes in stock is less than the quantity you are trying to sell, please enter a lower quantity',
+        'Sorry, the quantity of the item in stock is less than the quantity you are trying to sell, please enter a lower quantity',
     });
   } else {
     // remember to only change the variable quantity not the quantity bought
@@ -74,7 +74,7 @@ exports.product_sell1 = async (req, res) => {
       { quantity: oldProduct.quantity - req.body.quantity }
     );
 
-    //there is need for functionality that returns a statement of shoe not in stock when user tries to sell a shoe that is not in store
+    //there is need for functionality that returns a statement of item not in stock when user tries to sell an item that is not in store
 
     let sell = new Sell({
       userId: req.session.user._id,
@@ -100,16 +100,12 @@ exports.product_sell1 = async (req, res) => {
 exports.displayTransactions = async(req, res) => {
   const sell = await Sell.find({userId: req.session.user._id})
   const product = await Product.find({userId: req.session.user._id})
-  // Sell.find(function (err, sell) {
-  //   Product.find(function (err, product) {
       res.render('sellTransactions', {
         title: 'Transactions',
         sell: sell,
         product: product,
         name: req.session.user.businessName
       });
-  //   });
-  // });
 };
 
 exports.displayTransactionsJSON = async(req, res) => {
@@ -117,11 +113,6 @@ exports.displayTransactionsJSON = async(req, res) => {
   const sells = await Sell.find({userId: req.session.user._id}).select('name quantity -_id')
   res.json(sells)
   
-  // Sell.find(function (err, sell) {
-  //   Product.find(function (err, product) {
-  //     return res.json({ sell });
-  //   });
-  // });
 };
 
 //get data for generating the store graph
@@ -169,4 +160,12 @@ exports.displaySingleSaleRecord = async(req, res) => {
 exports.deleteSaleRecord =async(req, res) => {
   const sell = await Sell.findByIdAndDelete(req.params.id)
   res.redirect('/sellTransactions')
+}
+
+exports.getAddWithQrCode = async(req, res) => {
+  res.render('qrSell')
+}
+
+exports.addWithQrCode = async(req, res) => {
+
 }
