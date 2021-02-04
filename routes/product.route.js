@@ -13,9 +13,11 @@ router.get('/storeDataJSON', product_controller.displayStoreGraphData)
 router.get('/permanentRecords', checkToken.checkAuth, product_controller.getPermanentRecords)
 router.get('/singleProduct/:id', checkToken.checkAuth, product_controller.displaySingleProduct)
 router.get('/singleSaleRecord/:id', checkToken.checkAuth, product_controller.displaySingleSaleRecord)
+router.get('/qrSell', checkToken.checkAuth, product_controller.getAddWithQrCode)
 
 router.post('/sell', checkToken.checkAuth, product_controller.product_sell1);
 router.post('/buy', checkToken.checkAuth, product_controller.product_buy);
+router.post('/buyWithQrCode', checkToken.checkAuth, product_controller.addWithQrCode)
 //some of these may need to be changed to post method
 router.get('/deleteRecord/:id', checkToken.checkAuth, product_controller.deleteStoreRecord);
 router.get('/deleteSaleRecord/:id', checkToken.checkAuth, product_controller.deleteSaleRecord)

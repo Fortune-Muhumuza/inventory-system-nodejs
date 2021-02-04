@@ -63,14 +63,14 @@ block content
     {
     Total = Total + parseInt(totalShoes.rows[i].cells[1].innerHTML);
     }
-    document.getElementById("val2").innerHTML = "Total shoes sold = " + Total;
+    document.getElementById("val2").innerHTML = "Total items sold = " + Total;
 
     var totalShoesBought = document.getElementById("table2"), sum = 0;
     for(var i = 1; i < totalShoesBought.rows.length; i++)
     {
     sum = sum + parseInt(totalShoesBought.rows[i].cells[1].innerHTML);
     }
-    document.getElementById("shoesBought").innerHTML = "Total shoes bought = " + sum;
+    document.getElementById("shoesBought").innerHTML = "Total items bought = " + sum;
 
 
 
