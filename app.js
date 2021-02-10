@@ -57,8 +57,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 const uri = 
- 'mongodb://localhost:27017/invsystem';
-//'mongodb+srv://Fort:fortune@cluster0.144qe.mongodb.net/KhanShoeCenter?retryWrites=true&w=majority';
+//  'mongodb://localhost:27017/invsystem';
+'mongodb+srv://Fort:fortune@cluster0.144qe.mongodb.net/KhanShoeCenter?retryWrites=true&w=majority';
 mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
