@@ -12,7 +12,7 @@ exports.test = function (req, res) {
 exports.product_buy = async function (req, res) {
   // In a future version maybe ill add option for first
   // querying the DB to see if the product exists already
-  // if it does ill just increase its amount
+  // if it does ill just increase it's amount
 
  
 
@@ -32,7 +32,7 @@ exports.product_buy = async function (req, res) {
       (+req.body.buyingPrice + +req.body.tax / +req.body.quantity),
     date: dateFormat(new Date(), 'dddd-mmmm-dS-yyyy, h:MM TT'),
   });
-  /* this is for the cumulative quantity ..THIS IS VERY IMPORTANT AND SHOULD BE
+  /* this is for cumulative quantity ..THIS IS VERY IMPORTANT AND SHOULD BE
    TREATED AS A
   CRITICAL ISSUE BECAUE WHEN THIS PART IS RUN, WITHOUT FIXING THIS ISSUE,
   IT ALSO REDUCES THE
@@ -42,7 +42,7 @@ exports.product_buy = async function (req, res) {
   product.save(function (err) {
     if (err) {
       res.send('there was an error');
-      // return next(err);
+      
     }
     res.redirect('/');
   });
