@@ -1,171 +1,201 @@
-/* eslint-disable space-before-function-paren */
 'use strict';
+
 const dateFormat = require('dateformat');
 const Product = require('../models/product.model');
 const Sell = require('../models/sellTransactions');
+const { validationResult } = require('express-validator');
+const logger = require('../utils/logger'); // Custom logger for monitoring
 
-// Simple version, without validation or sanitation
-exports.test = function (req, res) {
-  res.render('index', {name: req.session.user.businessName});
+// Helper function for error handling
+const handleError = (res, message, redirectUrl = '/') => {
+  logger.error(message);
+  res.render('error', { error: message });
 };
 
-exports.product_buy = async function (req, res) {
-  // In a future version maybe ill add option for first
-  // querying the DB to see if the product exists already
-  // if it does ill just increase it's amount
-
- 
-
-  let product = new Product({
-    userId: req.session.user._id,
-    name: req.body.name.toLowerCase(),
-    //decided to use lower case instead
-    sellingPrice: req.body.sellingPrice,
-    quantity: req.body.quantity,
-    permanentQuantityBought: req.body.quantity,
-    cumulativeQuantity: req.body.quantity,
-    buyingValue: ((+req.body.buyingPrice) + (+req.body.tax / +req.body.quantity)) * +req.body.quantity,
-    tax: req.body.tax,
-    buyingPrice: req.body.buyingPrice,
-    profit:
-      +req.body.sellingPrice -
-      (+req.body.buyingPrice + +req.body.tax / +req.body.quantity),
-    date: dateFormat(new Date(), 'dddd-mmmm-dS-yyyy, h:MM TT'),
-  });
-  /* this is for cumulative quantity ..THIS IS VERY IMPORTANT AND SHOULD BE
-   TREATED AS A
-  CRITICAL ISSUE BECAUE WHEN THIS PART IS RUN, WITHOUT FIXING THIS ISSUE,
-  IT ALSO REDUCES THE
-  QUANTITY ON THE HISTORY TRANSACTION WHICH ISNT GOOD
-*/
-
-  product.save(function (err) {
-    if (err) {
-      res.send('there was an error');
-      
-    }
-    res.redirect('/');
-  });
+// Test route
+exports.test = (req, res) => {
+  res.render('index', { name: req.session.user.businessName });
 };
 
-exports.product_sell = (req, res) => {
-  res.render('sell', { page_name: 'sell', name: req.session.user.businessName});
-};
-
-exports.product_sell1 = async (req, res) => {
-  const oldProduct = await Product.findOne({
-    name: req.body.name.toLowerCase(),
-  });
-
-  // this checks if there are still items of that brand or model in stock and does the needful
-
-  if (oldProduct.quantity <= 0) {
-    res.render('error', { error: 'Sorry, this item is out of stock' });
+// Add a new product to the inventory
+exports.product_buy = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.render('error', { error: 'Invalid input data' });
   }
-  if (req.body.quantity > oldProduct.quantity) {
-    res.render('error', {
-      error:
-        'Sorry, the quantity of the item in stock is less than the quantity you are trying to sell, please enter a lower quantity',
+
+  try {
+    const product = new Product({
+      userId: req.session.user._id,
+      name: req.body.name.toLowerCase(),
+      sellingPrice: req.body.sellingPrice,
+      quantity: req.body.quantity,
+      permanentQuantityBought: req.body.quantity,
+      cumulativeQuantity: req.body.quantity,
+      buyingValue: ((+req.body.buyingPrice + (+req.body.tax / +req.body.quantity)) * +req.body.quantity),
+      tax: req.body.tax,
+      buyingPrice: req.body.buyingPrice,
+      profit: +req.body.sellingPrice - (+req.body.buyingPrice + +req.body.tax / +req.body.quantity),
+      date: dateFormat(new Date(), 'dddd-mmmm-dS-yyyy, h:MM TT'),
     });
-  } else {
-    // remember to only change the variable quantity not the quantity bought
-    const product = await Product.findOneAndUpdate(
+
+    await product.save();
+    res.redirect('/');
+  } catch (err) {
+    handleError(res, 'There was an error while adding the product.');
+  }
+};
+
+// Render sell page
+exports.product_sell = (req, res) => {
+  res.render('sell', { page_name: 'sell', name: req.session.user.businessName });
+};
+
+// Sell a product
+exports.product_sell1 = async (req, res) => {
+  try {
+    const oldProduct = await Product.findOne({ name: req.body.name.toLowerCase() });
+
+    if (!oldProduct) {
+      return res.render('error', { error: 'Product not found in inventory' });
+    }
+
+    if (oldProduct.quantity <= 0) {
+      return res.render('error', { error: 'Sorry, this item is out of stock' });
+    }
+
+    if (req.body.quantity > oldProduct.quantity) {
+      return res.render('error', {
+        error: 'Not enough stock to complete the sale. Please enter a lower quantity.',
+      });
+    }
+
+    // Update product quantity
+    await Product.findOneAndUpdate(
       { name: oldProduct.name },
       { quantity: oldProduct.quantity - req.body.quantity }
     );
 
-    //there is need for functionality that returns a statement of item not in stock when user tries to sell an item that is not in store
-
-    let sell = new Sell({
+    const sell = new Sell({
       userId: req.session.user._id,
       name: req.body.name.toLowerCase(),
       quantity: req.body.quantity,
       permanentQuantitySold: req.body.quantity,
       sellingPrice: oldProduct.sellingPrice,
-      paid: +oldProduct.sellingPrice * +req.body.quantity,
-      profit: +oldProduct.profit * +req.body.quantity,
+      paid: oldProduct.sellingPrice * req.body.quantity,
+      profit: oldProduct.profit * req.body.quantity,
       date: dateFormat(new Date(), 'dddd-mmmm-dS-yyyy, h:MM TT'),
     });
-    // INCASE OF ERRORS WE NEED TO FIND A WAY OF NOT CRUSHING SERVER
-    sell.save(function (err) {
-      if (err) {
-        res.send('sorry there was a problem');
-      }
-      res.redirect('/sellTransactions');
-    });
+
+    await sell.save();
+    res.redirect('/sellTransactions');
+  } catch (err) {
+    handleError(res, 'There was an error during the sale process.');
   }
 };
 
-// display the previous transactions
-exports.displayTransactions = async(req, res) => {
-  const sell = await Sell.find({userId: req.session.user._id})
-  const product = await Product.find({userId: req.session.user._id})
-      res.render('sellTransactions', {
-        title: 'Transactions',
-        sell: sell,
-        product: product,
-        name: req.session.user.businessName
-      });
+// Display all transactions
+exports.displayTransactions = async (req, res) => {
+  try {
+    const sells = await Sell.find({ userId: req.session.user._id });
+    const products = await Product.find({ userId: req.session.user._id });
+    res.render('sellTransactions', {
+      title: 'Transactions',
+      sell: sells,
+      product: products,
+      name: req.session.user.businessName,
+    });
+  } catch (err) {
+    handleError(res, 'There was an error fetching transactions.');
+  }
 };
 
-exports.displayTransactionsJSON = async(req, res) => {
-  //select helps to filter out specific data
-  const sells = await Sell.find({userId: req.session.user._id}).select('name quantity -_id')
-  res.json(sells)
-  
+// Display transactions in JSON format
+exports.displayTransactionsJSON = async (req, res) => {
+  try {
+    const sells = await Sell.find({ userId: req.session.user._id }).select('name quantity -_id');
+    res.json(sells);
+  } catch (err) {
+    handleError(res, 'Error fetching transactions as JSON.');
+  }
 };
 
-//get data for generating the store graph
-exports.displayStoreGraphData = async(req, res) => {
-  const products = await Product.find({}).select('name quantity -_id')
-  res.json(products)
-}
+// Get store graph data for visualization
+exports.displayStoreGraphData = async (req, res) => {
+  try {
+    const products = await Product.find({}).select('name quantity -_id');
+    res.json(products);
+  } catch (err) {
+    handleError(res, 'Error fetching store graph data.');
+  }
+};
 
+// Display all products in inventory
 exports.product_display = async (req, res) => {
-  const product = await Product.find({userId: req.session.user._id});
-  if (product) {
-    res.render('home', { title: 'Store', product, name: req.session.user.businessName });
-  } else {
-    res.render('error', {
-      error:
-        'Sorry, there was a problem retrieving the products from the store database',
-    });
+  try {
+    const products = await Product.find({ userId: req.session.user._id });
+    res.render('home', { title: 'Store', product: products, name: req.session.user.businessName });
+  } catch (err) {
+    handleError(res, 'Sorry, there was a problem retrieving the products.');
   }
 };
 
-exports.displaySingleProduct = async(req, res) => {
-  const product = await Product.findById(req.params.id)
-  //.select('name _id')
+// Display a single product
+exports.displaySingleProduct = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    res.render('singleProduct', { product });
+  } catch (err) {
+    handleError(res, 'Error displaying the product details.');
+  }
+};
 
-  //console.log(product)
-  res.render('singleProduct', {product: product})
-}
+// Get permanent records for all products
+exports.getPermanentRecords = async (req, res) => {
+  try {
+    const product = await Product.find({ userId: req.session.user._id }).select('name permanentQuantityBought -_id');
+    res.json(product);
+  } catch (err) {
+    handleError(res, 'Error fetching permanent records.');
+  }
+};
 
-//cumulative quantity already catered  for this but this is also fine
-exports.getPermanentRecords = async(req, res) => {
-  const product = await Product.find({userId: req.session.user._id}).select('name permanentQuantityBought -_id')
-  res.json(product)
-}
+// Delete a store record
+exports.deleteStoreRecord = async (req, res) => {
+  try {
+    await Product.findByIdAndDelete(req.params.id);
+    res.redirect('/');
+  } catch (err) {
+    handleError(res, 'Error deleting store record.');
+  }
+};
 
-exports.deleteStoreRecord = async(req, res) => {
-  const product = await Product.findByIdAndDelete(req.params.id)
-  res.redirect('/')
-}
+// Display a single sale record
+exports.displaySingleSaleRecord = async (req, res) => {
+  try {
+    const sell = await Sell.findById(req.params.id);
+    res.render('singleSaleRecord', { sell });
+  } catch (err) {
+    handleError(res, 'Error displaying the sale record.');
+  }
+};
 
-exports.displaySingleSaleRecord = async(req, res) => {
-  const sell = await Sell.findById(req.params.id)
-  res.render('singleSaleRecord', {sell: sell})
-}
+// Delete a sale record
+exports.deleteSaleRecord = async (req, res) => {
+  try {
+    await Sell.findByIdAndDelete(req.params.id);
+    res.redirect('/sellTransactions');
+  } catch (err) {
+    handleError(res, 'Error deleting the sale record.');
+  }
+};
 
-exports.deleteSaleRecord =async(req, res) => {
-  const sell = await Sell.findByIdAndDelete(req.params.id)
-  res.redirect('/sellTransactions')
-}
+// Render QR code page for adding product
+exports.getAddWithQrCode = (req, res) => {
+  res.render('qrSell');
+};
 
-exports.getAddWithQrCode = async(req, res) => {
-  res.render('qrSell')
-}
-
-exports.addWithQrCode = async(req, res) => {
-
-}
+// Add product via QR code (currently empty)
+exports.addWithQrCode = (req, res) => {
+  // Implement QR code logic here
+};
